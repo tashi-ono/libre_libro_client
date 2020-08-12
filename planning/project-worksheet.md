@@ -134,3 +134,5 @@ Watchlist/Reviews Page
 - [google-maps-react](https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/)
 - Axios
 - React, react-router-dom
+- Bootstrap
+- SASS/SCSS
