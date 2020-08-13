@@ -6,7 +6,7 @@ import "./FindLibrary.scss";
 
 // Change library form to modal
 
-const FindLibrary = ({ allLibraries }) => {
+const FindLibrary = ({ allLibraries, getAllLibraries }) => {
   return (
     <div>
       {" "}
@@ -17,7 +17,7 @@ const FindLibrary = ({ allLibraries }) => {
         </span>{" "}
       </h2>
       {/* <LibraryForm /> */}
-      <Map allLibraries={allLibraries} />
+      <Map allLibraries={allLibraries} getAllLibraries={getAllLibraries} />
       <LibraryList allLibraries={allLibraries} />
     </div>
   );

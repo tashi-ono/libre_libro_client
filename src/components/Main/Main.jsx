@@ -29,7 +29,12 @@ const Main = () => {
         <Route
           exact
           path="/libraries"
-          render={() => <FindLibrary allLibraries={allLibraries} />}
+          render={() => (
+            <FindLibrary
+              allLibraries={allLibraries}
+              getAllLibraries={getAllLibraries}
+            />
+          )}
         />
         <Route exact path="/libraries/:id" component={LibraryDetails} />
         <Route path="*" render={() => <Redirect to="/" />} />

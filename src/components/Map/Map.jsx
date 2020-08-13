@@ -30,7 +30,7 @@ const options = {
   zoomControl: true,
 };
 
-const Map = ({ allLibraries }) => {
+const Map = ({ allLibraries, getAllLibraries }) => {
   const [markers, setMarkers] = useState([...allLibraries]);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -53,6 +53,7 @@ const Map = ({ allLibraries }) => {
         lat: location.latLng.lat(),
         lng: location.latLng.lng(),
       });
+      getAllLibraries();
     } catch (err) {
       console.error(err);
     }
