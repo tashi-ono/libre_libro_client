@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./LibraryDetails.scss";
+import "./PopUpDetails.scss";
 import LibraryForm from "../LibraryForm/LibraryForm";
 
-const LibraryDetails = ({ selectedMarker, allLibraries }) => {
+const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
   console.log("library details props", selectedMarker, allLibraries);
 
   // if selected marker latlng matches one in allLibraries, then render the info from allLibraries array
@@ -14,12 +14,17 @@ const LibraryDetails = ({ selectedMarker, allLibraries }) => {
     );
 
     if (!foundLibrary[0].name) {
-      displayLibrary = <LibraryForm />;
+      displayLibrary = (
+        <LibraryForm
+          foundLibrary={foundLibrary}
+          getAllLibraries={getAllLibraries}
+        />
+      );
     } else {
       displayLibrary = foundLibrary.map((library) => {
         return (
           <div key={library.id}>
-            <Link to={`/library/${library.id}`}>
+            <Link to={`/libraries/${library.id}`}>
               <b>{library.name}</b>
             </Link>
             <p>
@@ -34,4 +39,4 @@ const LibraryDetails = ({ selectedMarker, allLibraries }) => {
   return <>{displayLibrary}</>;
 };
 
-export default LibraryDetails;
+export default PopUpDetails;

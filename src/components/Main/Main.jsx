@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import Homepage from "../Homepage/Homepage";
-import LibraryDetails from "../LibraryDetails/LibraryDetails";
+// import PopUpDetails from "../PopUpDetails/PopUpDetails";
+import LibraryPage from "../LibraryPage/LibraryPage";
 import FindLibrary from "../FindLibrary/FindLibrary";
 import "./Main.scss";
 
@@ -36,7 +37,7 @@ const Main = () => {
             />
           )}
         />
-        <Route exact path="/libraries/:id" component={LibraryDetails} />
+        <Route exact path="/libraries/:id" component={LibraryPage} />
         <Route path="*" render={() => <Redirect to="/" />} />
       </Switch>
     </main>

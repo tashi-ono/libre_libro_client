@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
-import LibraryDetails from "../LibraryDetails/LibraryDetails";
+import PopUpDetails from "../PopUpDetails/PopUpDetails";
 import "./Map.scss";
 
 // These are libraries that come with GoogleMap package
@@ -15,7 +15,7 @@ const libraries = ["places"];
 // Must set map container, otherwise we won't see it
 const mapContainerStyle = {
   width: "100vw",
-  height: "100vh",
+  height: "60vh",
 };
 
 // This gives us a default location when we load map for the first time
@@ -44,7 +44,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
 
   // When user clicks on a marker, it creates lat/lng
   // How do we tie in a click event to enter into a database?
-  // Tie the onclick event to another function that does an axios.put call
+  // Tie the onclick event to another function that does an axios.post call
 
   const clickAddLocation = async (location) => {
     console.log("added location", location);
@@ -59,7 +59,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
     }
   };
 
-  const handleClick = (event) => {
+  const handleMarkerClick = (event) => {
     console.log("selected marker", event);
     setSelectedMarker({
       lat: event.latLng.lat(),
@@ -104,9 +104,11 @@ const Map = ({ allLibraries, getAllLibraries }) => {
               // This sizes our icon to 30x30px
               scaledSize: new window.google.maps.Size(30, 30),
             }}
-            onClick={handleClick}
+            onClick={handleMarkerClick}
           />
         ))}
+
+        {/* Create a new marker upon clicking on map */}
         {markers.map((marker, index) => (
           <Marker
             key={index}
@@ -118,7 +120,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
               scaledSize: new window.google.maps.Size(30, 30),
             }}
             // Clicking on marker will allow the info window to pop up in ternary
-            onClick={handleClick}
+            onClick={handleMarkerClick}
           />
         ))}
         {/* If marker is clicked on, then show info window */}
@@ -131,9 +133,10 @@ const Map = ({ allLibraries, getAllLibraries }) => {
             }}
           >
             <div>
-              <LibraryDetails
+              <PopUpDetails
                 selectedMarker={selectedMarker}
                 allLibraries={allLibraries}
+                getAllLibraries={getAllLibraries}
               />
             </div>
           </InfoWindow>

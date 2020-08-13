@@ -10,7 +10,7 @@ const LibraryList = ({ allLibraries }) => {
     displayLibraries = allLibraries.map((library) => {
       return (
         <Link key={library.id} to={`/libraries/${library.id}`}>
-          <p>{library.name}</p>
+          <span>{library.name}</span>
         </Link>
       );
     });

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./LibraryForm.scss";
 // DON'T FORGET TO ADD VALUE!
-const LibraryForm = () => {
+const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
+  console.log("library form found library", foundLibrary);
   const [userInput, setUserInput] = useState({
+    id: "",
     name: "",
     details: "",
     img: "",
@@ -10,7 +13,11 @@ const LibraryForm = () => {
 
   const handleChange = (event) => {
     console.log("handle change", event.target.value);
-    setUserInput({ ...userInput, [event.target.name]: event.target.value });
+    setUserInput({
+      ...userInput,
+      id: foundLibrary[0].id,
+      [event.target.name]: event.target.value,
+    });
   };
 
   // Must refactor to allow file upload to cloud storage via Firebase(?)
@@ -21,17 +28,22 @@ const LibraryForm = () => {
   const handleSubmit = (event) => {
     console.log("handle submit", event.target);
     event.preventDefault();
-    // updateLibrary(userInput)
-    // setUserInput({name: "", details:"", img:""})
+    updateLibrary(userInput);
+    setUserInput({ id: "", name: "", details: "", img: "" });
   };
 
-  // const updateLibrary = async (libraryObj) =>{
-  //   try {
-  //       let res = axios.put(`http:localhost:3000/`)
-  //   } catch(err){
-  //     console.error(err)
-  //   }
-  // }
+  const updateLibrary = async (libraryObj) => {
+    console.log("library obj", libraryObj);
+    try {
+      let res = await axios.put(
+        `http://localhost:3000/libraries/${libraryObj.id}`,
+        libraryObj
+      );
+      getAllLibraries();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <>
       <p>Add New Library Info</p>
