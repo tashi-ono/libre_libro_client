@@ -1,8 +1,12 @@
 import React from "react";
+// import LibraryForm from "../LibraryForm/LibraryForm";
 import Map from "../Map/Map";
+import LibraryList from "../LibraryList/LibraryList";
 import "./FindLibrary.scss";
 
-const FindLibrary = () => {
+// Change library form to modal
+
+const FindLibrary = ({ allLibraries }) => {
   return (
     <div>
       {" "}
@@ -12,7 +16,9 @@ const FindLibrary = () => {
           📚
         </span>{" "}
       </h2>
-      <Map />
+      {/* <LibraryForm /> */}
+      <Map allLibraries={allLibraries} />
+      <LibraryList allLibraries={allLibraries} />
     </div>
   );
 };

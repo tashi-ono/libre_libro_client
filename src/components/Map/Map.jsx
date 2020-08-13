@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import axios from "axios";
 import "./Map.scss";
 
 // These are libraries that come with GoogleMap package
@@ -7,7 +13,7 @@ const libraries = ["places"];
 
 // Must set map container, otherwise we won't see it
 const mapContainerStyle = {
-  width: "50vw",
+  width: "100vw",
   height: "100vh",
 };
 
@@ -23,8 +29,10 @@ const options = {
   zoomControl: true,
 };
 
-const Map = () => {
-  const [markers, setMarkers] = useState([]);
+const Map = ({ allLibraries }) => {
+  const [markers, setMarkers] = useState([...allLibraries]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
+
   // Load our map and handle errors
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -32,6 +40,22 @@ const Map = () => {
   });
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
+
+  // When user clicks on a marker, it creates lat/lng
+  // How do we tie in a click event to enter into a database?
+  // Tie the onclick event to another function that does an axios.put call
+
+  const clickAddLocation = async (location) => {
+    console.log("added location", location);
+    try {
+      await axios.post(`http://localhost:3000/libraries`, {
+        lat: location.latLng.lat(),
+        lng: location.latLng.lng(),
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div>
@@ -42,21 +66,23 @@ const Map = () => {
         options={options}
         // create onclick event to set map markers down
         onClick={(event) => {
-          console.log(event);
+          // console.log(event);
+          clickAddLocation(event);
           setMarkers((currentMarkers) => [
             ...currentMarkers,
             {
               lat: event.latLng.lat(),
               lng: event.latLng.lng(),
-              placeId: event.placeId,
+              id: event.id,
             },
           ]);
-          console.log(markers);
+          console.log(event);
+          console.log("all markers", markers);
         }}
       >
-        {markers.map((marker) => (
+        {markers.map((marker, index) => (
           <Marker
-            key={marker.placeId}
+            key={index}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url:
@@ -64,8 +90,29 @@ const Map = () => {
               // This sizes our icon to 30x30px
               scaledSize: new window.google.maps.Size(30, 30),
             }}
+            // Clicking on marker will allow the info window to pop up in ternary
+            onClick={() => {
+              console.log("selected marker", marker);
+              setSelectedMarker(marker);
+            }}
           />
         ))}
+
+        {/* If marker is clicked on, then show info window */}
+        {selectedMarker ? (
+          <InfoWindow
+            position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
+            // When you press the x button on info window, it will reset the window so it can appear again later.
+            onCloseClick={() => {
+              setSelectedMarker(null);
+            }}
+          >
+            <div>
+              <p>Library info</p>
+              <p>picture</p>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );
