@@ -9,9 +9,6 @@ const LibraryForm = () => {
         <label htmlFor="name"></label>
         <input type="text" name="name" placeholder="Name" required />
         <br />
-        <label htmlFor="location"></label>
-        <input type="text" name="location" placeholder="Location" required />
-        <br />
         <label htmlFor="location-details"></label>
         <input
           type="text"
@@ -23,9 +20,9 @@ const LibraryForm = () => {
         <br />
         <input type="file" name="library-img" accept="image/*" />
         <br />
-        <label for="preview">Image Preview:</label>
+        <label htmlFor="preview">Image Preview:</label>
         <br />
-        <img id="preview" width="300" src="" />
+        <img id="preview" width="50" src="" />
         <button type="submit">Submit</button>
       </form>
     </>

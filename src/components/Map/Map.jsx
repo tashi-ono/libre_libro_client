@@ -6,6 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
+import LibraryDetails from "../LibraryDetails/LibraryDetails";
 import "./Map.scss";
 
 // These are libraries that come with GoogleMap package
@@ -129,8 +130,10 @@ const Map = ({ allLibraries }) => {
             }}
           >
             <div>
-              <p>Library info</p>
-              <p>picture</p>
+              <LibraryDetails
+                selectedMarker={selectedMarker}
+                allLibraries={allLibraries}
+              />
             </div>
           </InfoWindow>
         ) : null}
