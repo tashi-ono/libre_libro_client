@@ -57,12 +57,20 @@ const Map = ({ allLibraries }) => {
     }
   };
 
+  const handleClick = (event) => {
+    console.log("selected marker", event);
+    setSelectedMarker({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    });
+  };
+  console.log("all libraries props", allLibraries);
   return (
     <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
-        zoom={15}
+        zoom={13}
         options={options}
         // create onclick event to set map markers down
         onClick={(event) => {
@@ -76,10 +84,27 @@ const Map = ({ allLibraries }) => {
               id: event.id,
             },
           ]);
-          console.log(event);
-          console.log("all markers", markers);
+          // console.log(event);
+          // console.log("all markers", markers);
         }}
       >
+        {/* Create markers for libraries in our database */}
+        {allLibraries.map((library) => (
+          <Marker
+            key={library.id}
+            position={{
+              lat: parseFloat(library.lat),
+              lng: parseFloat(library.lng),
+            }}
+            icon={{
+              url:
+                "https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597258764/LibreLibro%20Assets/birdhouse_fbdbw6.png",
+              // This sizes our icon to 30x30px
+              scaledSize: new window.google.maps.Size(30, 30),
+            }}
+            onClick={handleClick}
+          />
+        ))}
         {markers.map((marker, index) => (
           <Marker
             key={index}
@@ -91,13 +116,9 @@ const Map = ({ allLibraries }) => {
               scaledSize: new window.google.maps.Size(30, 30),
             }}
             // Clicking on marker will allow the info window to pop up in ternary
-            onClick={() => {
-              console.log("selected marker", marker);
-              setSelectedMarker(marker);
-            }}
+            onClick={handleClick}
           />
         ))}
-
         {/* If marker is clicked on, then show info window */}
         {selectedMarker ? (
           <InfoWindow
