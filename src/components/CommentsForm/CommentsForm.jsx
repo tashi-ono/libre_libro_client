@@ -7,7 +7,7 @@ const CommentsForm = ({ library, getAllLibraries }) => {
   // console.log("comment form props", library);
   const [commentInput, setCommentInput] = useState({
     username: "",
-    comment: "",
+    user_comments: "",
   });
   const handleCommentChange = (event) => {
     // console.log("comment changes", event.target.value);
@@ -21,7 +21,7 @@ const CommentsForm = ({ library, getAllLibraries }) => {
     event.preventDefault();
     // console.log("handle comment submit", event.target);
     addComment(commentInput);
-    setCommentInput({ username: "", comment: "" });
+    setCommentInput({ username: "", user_comments: "" });
   };
 
   const addComment = async (commentObj) => {
@@ -49,24 +49,24 @@ const CommentsForm = ({ library, getAllLibraries }) => {
       />
       <br />
 
-      <label htmlFor="comment"></label>
+      <label htmlFor="user_comments"></label>
       {/* 
       <input
         type="text"
-        name="comment"
+        name="user_comments"
         placeholder="add comment"
         onChange={handleCommentChange}
-        value={commentInput.comment}
+        value={commentInput.user_comments}
       /> */}
 
       <textarea
-        name="comment"
+        name="user_comments"
         type="text"
         placeholder="Enter comment here..."
         rows="10"
         cols="50"
         onChange={handleCommentChange}
-        value={commentInput.comment}
+        value={commentInput.user_comments}
         required
       ></textarea>
       <button type="submit">Submit</button>

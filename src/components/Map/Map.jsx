@@ -69,8 +69,8 @@ const Map = ({ allLibraries, getAllLibraries }) => {
     console.log("added location", location);
     try {
       await axios.post(`http://localhost:3000/libraries`, {
-        lat: location.latLng.lat(),
-        lng: location.latLng.lng(),
+        lat: parseFloat(location.latLng.lat()),
+        lng: parseFloat(location.latLng.lng()),
       });
       getAllLibraries();
     } catch (err) {
@@ -81,8 +81,8 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   const handleMarkerClick = (event) => {
     console.log("selected marker", event);
     setSelectedMarker({
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng(),
+      lat: parseFloat(event.latLng.lat()),
+      lng: parseFloat(event.latLng.lng()),
     });
   };
   // console.log("all libraries props", allLibraries);

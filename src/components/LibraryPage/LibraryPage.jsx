@@ -5,25 +5,25 @@ import "./LibraryPage.scss";
 import axios from "axios";
 
 const LibraryPage = ({ match, getAllLibraries }) => {
-  console.log("match library page", match);
+  // console.log("match library page", match);
   const [library, setLibrary] = useState([]);
   const [comments, setComments] = useState([]);
 
-  const getALibrary = async () => {
-    try {
-      let res = await axios.get(
-        `http://localhost:3000/libraries/${match.params.id}`
-      );
-      console.log("get a library details", res.data);
-      console.log("get comments", res.data.comments);
-      setLibrary(res.data);
-      setComments(res.data.comments);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
+    const getALibrary = async () => {
+      try {
+        let res = await axios.get(
+          `http://localhost:3000/libraries/${match.params.id}`
+        );
+        // console.log("get a library details", res.data);
+        // console.log("get comments", res.data.comments);
+        setLibrary(res.data);
+        setComments(res.data.comments);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
     getALibrary();
   }, [match]);
 
@@ -42,7 +42,7 @@ const LibraryPage = ({ match, getAllLibraries }) => {
               {comment.username} posted on {formattedDate}{" "}
             </b>
           </p>
-          <p>{comment.comment}</p>
+          <p>{comment.user_comments}</p>
         </div>
       );
     });
