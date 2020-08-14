@@ -38,11 +38,11 @@ const CommentsForm = ({ library, getAllLibraries }) => {
   };
   return (
     <form onSubmit={handleCommentSubmit}>
-      <label htmlFor="username">Add username:</label>
+      <label htmlFor="username">Add username: </label>
       <input
         type="text"
         name="username"
-        placeholder="username"
+        placeholder="username (required)"
         onChange={handleCommentChange}
         value={commentInput.username}
         required
@@ -50,21 +50,13 @@ const CommentsForm = ({ library, getAllLibraries }) => {
       <br />
 
       <label htmlFor="user_comments"></label>
-      {/* 
-      <input
-        type="text"
-        name="user_comments"
-        placeholder="add comment"
-        onChange={handleCommentChange}
-        value={commentInput.user_comments}
-      /> */}
 
       <textarea
         name="user_comments"
         type="text"
         placeholder="Enter comment here..."
         rows="10"
-        cols="50"
+        cols="40"
         onChange={handleCommentChange}
         value={commentInput.user_comments}
         required

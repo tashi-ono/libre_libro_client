@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import CommentEdit from "../CommentEdit/CommentEdit";
 import CommentsForm from "../CommentsForm/CommentsForm";
 import "./LibraryPage.scss";
 import axios from "axios";
@@ -8,6 +9,7 @@ const LibraryPage = ({ match, getAllLibraries }) => {
   // console.log("match library page", match);
   const [library, setLibrary] = useState([]);
   const [comments, setComments] = useState([]);
+  // const [openUpdateModal, setOpenUpdateModal] = useState(false);
 
   useEffect(() => {
     const getALibrary = async () => {
@@ -27,6 +29,17 @@ const LibraryPage = ({ match, getAllLibraries }) => {
     getALibrary();
   }, [match]);
 
+  // Modal is used to update or delete a comment
+  // const handleUpdate = (event) => {
+  //   console.log("handle comment click", event.target);
+  //   setOpenUpdateModal(true);
+  // };
+
+  // let showModal = null;
+  // if (openUpdateModal) {
+  //   showModal = <CommentEdit />;
+  // }
+
   let displayComments = <p>No comments add yet!</p>;
   if (comments.length > 0) {
     displayComments = comments.map((comment) => {
@@ -35,14 +48,20 @@ const LibraryPage = ({ match, getAllLibraries }) => {
         "MM/dd/yyyy @ p"
       );
       // console.log("time", comment.created_at);
+
       return (
-        <div key={`${Date.parse(formattedDate)} + ${comment.id}`}>
+        <div
+          // onClick={handleUpdate}
+          key={`${Date.parse(formattedDate)} + ${comment.id}`}
+        >
           <p>
             <b>
               {comment.username} posted on {formattedDate}{" "}
             </b>
           </p>
           <p>{comment.user_comments}</p>
+          <CommentEdit comment={comment} getAllLibraries={getAllLibraries} />
+          {/* {showModal} */}
         </div>
       );
     });
