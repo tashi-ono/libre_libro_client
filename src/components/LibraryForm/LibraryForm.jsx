@@ -35,7 +35,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
   const updateLibrary = async (libraryObj) => {
     console.log("library obj", libraryObj);
     try {
-      let res = await axios.put(
+      await axios.put(
         `http://localhost:3000/libraries/${libraryObj.id}`,
         libraryObj
       );
@@ -90,7 +90,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
         <label htmlFor="preview"></label>
         <br />
 
-        <img name="preview" width="50" src={userInput.img} />
+        <img name="preview" width="50" src={userInput.img} alt="library-img" />
         <button type="submit">Submit</button>
       </form>
     </>

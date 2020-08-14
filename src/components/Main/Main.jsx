@@ -9,10 +9,11 @@ import "./Main.scss";
 
 const Main = () => {
   const [allLibraries, setAllLibraries] = useState([]);
+
   const getAllLibraries = async () => {
     try {
       const res = await axios.get("http://localhost:3000/libraries");
-      console.log("all libraries", res.data);
+      console.log("all libraries from main", res.data);
       setAllLibraries(res.data);
     } catch (err) {
       console.error(err);
@@ -38,6 +39,11 @@ const Main = () => {
           )}
         />
         <Route exact path="/libraries/:id" component={LibraryPage} />
+        {/* <Route
+          exact
+          path="/libraries/:id"
+          render={() => <LibraryPage getAllLibraries={getAllLibraries} />}
+        /> */}
         <Route path="*" render={() => <Redirect to="/" />} />
       </Switch>
     </main>

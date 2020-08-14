@@ -12,7 +12,7 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
     let foundLibrary = allLibraries.filter(
       (library) => parseFloat(library.lat) === parseFloat(selectedMarker.lat)
     );
-
+    console.log("found library", foundLibrary);
     if (!foundLibrary[0].name) {
       displayLibrary = (
         <LibraryForm

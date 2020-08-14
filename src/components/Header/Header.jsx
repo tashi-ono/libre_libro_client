@@ -5,6 +5,9 @@ const Header = () => {
   return (
     <div>
       <h1>LibreLibro</h1>
+      <span>Find A Library</span>
+      <span>Add a Library</span>
+      <span>Watchlist/Reviews</span>
     </div>
   );
 };

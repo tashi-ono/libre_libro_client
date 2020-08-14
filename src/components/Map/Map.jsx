@@ -42,6 +42,25 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
 
+  let needsLabel = allLibraries.filter((libInfo) => libInfo.name === null);
+  let label;
+  // Conditional statement is so that any libraries without names will have a label for info to be added
+  // Label does not persist upon re-render!!!
+  if (!selectedMarker && needsLabel) {
+    label = {
+      text: "Click to Add Info",
+      fontSize: "15px",
+      fontWeight: "bold",
+      zIndex: "3",
+    };
+  }
+
+  // let displayLibrary;
+  // if (allLibraries && selectedMarker) {
+  //   let foundLibrary = allLibraries.filter(
+  //     (library) => parseFloat(library.lat) === parseFloat(selectedMarker.lat)
+  //   );
+
   // When user clicks on a marker, it creates lat/lng
   // How do we tie in a click event to enter into a database?
   // Tie the onclick event to another function that does an axios.post call
@@ -66,7 +85,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
       lng: event.latLng.lng(),
     });
   };
-  console.log("all libraries props", allLibraries);
+  // console.log("all libraries props", allLibraries);
   return (
     <div>
       <GoogleMap
@@ -109,10 +128,12 @@ const Map = ({ allLibraries, getAllLibraries }) => {
         ))}
 
         {/* Create a new marker upon clicking on map */}
+        {console.log("markers", markers)}
         {markers.map((marker, index) => (
           <Marker
             key={index}
             position={{ lat: marker.lat, lng: marker.lng }}
+            clickable={true}
             icon={{
               url:
                 "https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597258764/LibreLibro%20Assets/birdhouse_fbdbw6.png",
@@ -121,6 +142,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
             }}
             // Clicking on marker will allow the info window to pop up in ternary
             onClick={handleMarkerClick}
+            label={label}
           />
         ))}
         {/* If marker is clicked on, then show info window */}

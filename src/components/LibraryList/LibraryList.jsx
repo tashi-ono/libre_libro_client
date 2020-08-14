@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./LibraryList.scss";
 
-const LibraryList = ({ allLibraries }) => {
-  console.log("librarylist", allLibraries);
+const LibraryList = ({ allLibraries, getAllLibraries }) => {
+  // console.log("librarylist", allLibraries);
   let displayLibraries = <h2>Loading...</h2>;
 
   if (allLibraries[0]) {
