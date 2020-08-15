@@ -12,25 +12,37 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
     let foundLibrary = allLibraries.filter(
       (library) => parseFloat(library.lat) === parseFloat(selectedMarker.lat)
     );
+
     console.log("found library", foundLibrary);
-    if (!foundLibrary[0].name) {
+    if (foundLibrary[0].name === null || undefined) {
       displayLibrary = (
-        <LibraryForm
-          foundLibrary={foundLibrary}
-          getAllLibraries={getAllLibraries}
-        />
+        <>
+          <LibraryForm
+            foundLibrary={foundLibrary[0]}
+            getAllLibraries={getAllLibraries}
+          />
+
+          {/* Unable to use LibraryDelete component here without erroring out. */}
+          <Link to={`/libraries/${foundLibrary[0].id}`}>
+            <button>Add Comments or Delete Library</button>
+          </Link>
+        </>
       );
     } else {
       displayLibrary = foundLibrary.map((library) => {
         return (
-          <div key={library.id}>
-            <Link to={`/libraries/${library.id}`}>
-              <b>{library.name}</b>
-            </Link>
-            <p>
-              <b>Location Details: </b>
-              {library.details}
-            </p>
+          <div className="pop-up-container" key={library.id}>
+            <img src={library.img} alt="library-img" width="100px" />
+            <div className="pop-up-text">
+              <Link to={`/libraries/${library.id}`}>
+                <b>{library.name ? library.name : "Add a name"}</b>
+              </Link>
+              <br />
+              <p>
+                <b>Location Details: </b>
+                {library.details}
+              </p>
+            </div>
           </div>
         );
       });

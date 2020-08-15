@@ -4,32 +4,27 @@ import "./LibraryForm.scss";
 // DON'T FORGET TO ADD VALUE!
 const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
   console.log("library form found library", foundLibrary);
-  const [userInput, setUserInput] = useState({
-    id: "",
-    name: "",
-    details: "",
-    img: "",
-  });
+  const [userInput, setUserInput] = useState(
+    { ...foundLibrary } || {
+      name: "",
+      details: "",
+      img: "",
+    }
+  );
 
+  // If no change was submitted for certain input fields, how do we prevent them from being updated to an empty string?
   const handleChange = (event) => {
-    console.log("handle change", event.target.value);
+    console.log("handle change from libraryform", event.target.value);
     setUserInput({
       ...userInput,
-      id: foundLibrary[0].id,
       [event.target.name]: event.target.value,
     });
   };
 
-  // Must refactor to allow file upload to cloud storage via Firebase(?)
-  // const handleFileUpload = (event) => {
-  //   console.log("handlefileupload", event.target.files[0]);
-  //   setUserInput({ ...userInput, [event.target.name]: event.target.files[0] });
-  // };
   const handleSubmit = (event) => {
-    console.log("handle submit", event.target);
+    console.log("handle submit from libraryform", event.target.name);
     event.preventDefault();
     updateLibrary(userInput);
-    setUserInput({ id: "", name: "", details: "", img: "" });
   };
 
   const updateLibrary = async (libraryObj) => {
@@ -46,7 +41,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
   };
   return (
     <>
-      <p>Add New Library Info</p>
+      <p>Add Library Info</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name"></label>
         <input
@@ -54,7 +49,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
           name="name"
           placeholder="Name"
           onChange={handleChange}
-          value={userInput.name}
+          value={userInput.name ? userInput.name : ""}
           required
         />
         <br />
@@ -65,7 +60,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
           name="details"
           placeholder="Location Details"
           onChange={handleChange}
-          value={userInput.details}
+          value={userInput.details ? userInput.details : ""}
         />
         <br />
 
@@ -75,22 +70,10 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
           name="img"
           placeholder="Image URL"
           onChange={handleChange}
-          value={userInput.img}
+          value={userInput.img ? userInput.img : ""}
         />
-        {/* <input
-          type="file"
-          name="img"
-          accept="image/*"
-          onChange={handleFileUpload}
-          value={userInput.img}
-        /> */}
 
         <br />
-
-        <label htmlFor="preview"></label>
-        <br />
-
-        <img name="preview" width="50" src={userInput.img} alt="library-img" />
         <button type="submit">Submit</button>
       </form>
     </>

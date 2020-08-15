@@ -111,19 +111,20 @@ Watchlist/Reviews Page
 #### One Library has_many Comments
 
 ```
-  create_table "libraries", force: :cascade do |t|
-    t.string "name"
-    t.integer "lat"
-    t.integer "lng"
-    t.string "details"
-    t.string "img"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "comments", force: :cascade do |t|
     t.string "username"
-    t.string "comment"
+    t.string "user_comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "library_id"
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "name"
+    t.decimal "lat"
+    t.decimal "lng"
+    t.string "details"
+    t.string "img"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -131,8 +132,10 @@ Watchlist/Reviews Page
 
 ## Additional Libraries
 
-- [google-maps-react](https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/)
+- [@react-google-maps/api](https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/)
+- [date-fns](https://date-fns.org/)
 - Axios
 - React, react-router-dom
+- Dotenv
 - Bootstrap
 - SASS/SCSS

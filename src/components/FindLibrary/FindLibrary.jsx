@@ -7,7 +7,7 @@ import "./FindLibrary.scss";
 // Change library form to modal
 
 const FindLibrary = ({ allLibraries, getAllLibraries }) => {
-  console.log("findlibrayr", allLibraries);
+  // console.log("findlibrary", allLibraries);
   return (
     <div>
       {" "}
@@ -17,6 +17,8 @@ const FindLibrary = ({ allLibraries, getAllLibraries }) => {
           📚
         </span>{" "}
       </h2>
+      <p>OR add a library by tapping on the map!</p>
+      <p>Tap again to add library info.</p>
       {/* <LibraryForm /> */}
       <Map allLibraries={allLibraries} getAllLibraries={getAllLibraries} />
       <LibraryList

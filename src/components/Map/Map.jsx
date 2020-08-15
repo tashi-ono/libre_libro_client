@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -42,18 +42,26 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
 
+  // Ref retains state without causing re-renders
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
   let needsLabel = allLibraries.filter((libInfo) => libInfo.name === null);
-  let label;
+
+  // console.log("needs label", needsLabel);
+  // let label;
   // Conditional statement is so that any libraries without names will have a label for info to be added
   // Label does not persist upon re-render!!!
-  if (!selectedMarker && needsLabel) {
-    label = {
-      text: "Click to Add Info",
-      fontSize: "15px",
-      fontWeight: "bold",
-      zIndex: "3",
-    };
-  }
+  // if (needsLabel) {
+  // const label = {
+  //   text: "Click to Add Info",
+  //   fontSize: "15px",
+  //   fontWeight: "bold",
+  //   zIndex: "3",
+  // };
+  // }
 
   // let displayLibrary;
   // if (allLibraries && selectedMarker) {
@@ -66,7 +74,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   // Tie the onclick event to another function that does an axios.post call
 
   const clickAddLocation = async (location) => {
-    console.log("added location", location);
+    // console.log("added location", location);
     try {
       await axios.post(`http://localhost:3000/libraries`, {
         lat: parseFloat(location.latLng.lat()),
@@ -108,6 +116,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
           // console.log(event);
           // console.log("all markers", markers);
         }}
+        onLoad={onMapLoad}
       >
         {/* Create markers for libraries in our database */}
         {allLibraries.map((library) => (
@@ -128,11 +137,14 @@ const Map = ({ allLibraries, getAllLibraries }) => {
         ))}
 
         {/* Create a new marker upon clicking on map */}
-        {console.log("markers", markers)}
+        {/* {console.log("markers", markers)} */}
         {markers.map((marker, index) => (
           <Marker
             key={index}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            position={{
+              lat: parseFloat(marker.lat),
+              lng: parseFloat(marker.lng),
+            }}
             clickable={true}
             icon={{
               url:
@@ -142,7 +154,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
             }}
             // Clicking on marker will allow the info window to pop up in ternary
             onClick={handleMarkerClick}
-            label={label}
+            // label={needsLabel ? label : null}
           />
         ))}
         {/* If marker is clicked on, then show info window */}
