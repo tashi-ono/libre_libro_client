@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -6,7 +6,9 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
+import LocationSearch from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
+
 import "./Map.scss";
 
 // These are libraries that come with GoogleMap package
@@ -31,24 +33,65 @@ const options = {
 };
 
 const Map = ({ allLibraries, getAllLibraries }) => {
-  const [markers, setMarkers] = useState([...allLibraries]);
-  const [selectedMarker, setSelectedMarker] = useState(null);
-
   // Load our map and handle errors
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries,
   });
+  const [markers, setMarkers] = useState([...allLibraries]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
+
+  // create onclick event to set map markers down
+  // useCallback will allow me to use the setMarker function, which will retain its value and only re-render itself
+  // if its dependancies are updated to a new value
+
+  const onMapClick = useCallback(async (event) => {
+    // console.log(event);
+
+    // console.log("added location", location);
+    try {
+      await axios.post(`http://localhost:3000/libraries`, {
+        lat: parseFloat(event.latLng.lat()),
+        lng: parseFloat(event.latLng.lng()),
+      });
+      getAllLibraries();
+    } catch (err) {
+      console.error(err);
+    }
+
+    setMarkers((currentMarkers) => [
+      ...currentMarkers,
+      {
+        lat: event.latLng.lat(),
+        lng: event.latLng.lng(),
+        id: event.id,
+      },
+    ]);
+    // console.log(event);
+    // console.log("all markers", markers);
+  }, []);
+
+  // Ref retains map instance without causing re-renders and resetting the map position
+  const mapRef = useRef();
+  // const [mapRef, setMapRef] = useState()
+  const onMapLoad = useCallback((map) => {
+    mapRef.current = map;
+    console.log("mapRef", map);
+  }, []);
+
+  // useEffect(() => {
+  //   onMapLoad();
+  // }, [allLibraries]);
+
+  const panToSearch = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(15);
+  }, []);
+
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
 
-  // Ref retains state without causing re-renders
-  const mapRef = useRef();
-  const onMapLoad = useCallback((map) => {
-    mapRef.current = map;
-  }, []);
-
-  let needsLabel = allLibraries.filter((libInfo) => libInfo.name === null);
+  // let needsLabel = allLibraries.filter((libInfo) => libInfo.name === null);
 
   // console.log("needs label", needsLabel);
   // let label;
@@ -73,19 +116,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   // How do we tie in a click event to enter into a database?
   // Tie the onclick event to another function that does an axios.post call
 
-  const clickAddLocation = async (location) => {
-    // console.log("added location", location);
-    try {
-      await axios.post(`http://localhost:3000/libraries`, {
-        lat: parseFloat(location.latLng.lat()),
-        lng: parseFloat(location.latLng.lng()),
-      });
-      getAllLibraries();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+  // This allows you to get the location of a marker that you've added
   const handleMarkerClick = (event) => {
     console.log("selected marker", event);
     setSelectedMarker({
@@ -96,26 +127,13 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   // console.log("all libraries props", allLibraries);
   return (
     <div>
+      <LocationSearch panToSearch={panToSearch} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={13}
         options={options}
-        // create onclick event to set map markers down
-        onClick={(event) => {
-          // console.log(event);
-          clickAddLocation(event);
-          setMarkers((currentMarkers) => [
-            ...currentMarkers,
-            {
-              lat: event.latLng.lat(),
-              lng: event.latLng.lng(),
-              id: event.id,
-            },
-          ]);
-          // console.log(event);
-          // console.log("all markers", markers);
-        }}
+        onClick={onMapClick}
         onLoad={onMapLoad}
       >
         {/* Create markers for libraries in our database */}

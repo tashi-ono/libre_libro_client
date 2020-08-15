@@ -17,8 +17,8 @@ const LibraryDelete = ({ library, getAllLibraries }) => {
       try {
         await axios.delete(`http://localhost:3000/libraries/${library.id}`);
         // redirect to libraries page
-        getAllLibraries();
         setIsDeleted(true);
+        getAllLibraries();
       } catch (err) {
         console.error(err);
       }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./PopUpDetails.scss";
-import LibraryForm from "../LibraryForm/LibraryForm";
+// import LibraryForm from "../LibraryForm/LibraryForm";
 
 const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
   console.log("library details props", selectedMarker, allLibraries);
@@ -14,13 +14,13 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
     );
 
     console.log("found library", foundLibrary);
-    if (foundLibrary[0].name === null || undefined) {
+    if (!selectedMarker) {
       displayLibrary = (
         <>
-          <LibraryForm
+          {/* <LibraryForm
             foundLibrary={foundLibrary[0]}
             getAllLibraries={getAllLibraries}
-          />
+          /> */}
 
           {/* Unable to use LibraryDelete component here without erroring out. */}
           <Link to={`/libraries/${foundLibrary[0].id}`}>
@@ -32,15 +32,25 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
       displayLibrary = foundLibrary.map((library) => {
         return (
           <div className="pop-up-container" key={library.id}>
-            <img src={library.img} alt="library-img" width="100px" />
+            {library.img ? (
+              <img src={library.img} alt="library-img" width="100px" />
+            ) : null}
+
             <div className="pop-up-text">
               <Link to={`/libraries/${library.id}`}>
-                <b>{library.name ? library.name : "Add a name"}</b>
+                {library.name ? (
+                  library.name
+                ) : (
+                  <button>Add Library Info</button>
+                )}
               </Link>
               <br />
               <p>
-                <b>Location Details: </b>
-                {library.details}
+                {library.details ? (
+                  <>
+                    <b>Location Details: </b> {library.details}
+                  </>
+                ) : null}
               </p>
             </div>
           </div>
