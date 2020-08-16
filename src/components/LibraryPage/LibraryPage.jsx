@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import CommentEdit from "../CommentEdit/CommentEdit";
 import CommentsForm from "../CommentsForm/CommentsForm";
 import LibraryForm from "../LibraryForm/LibraryForm";
-import LibraryDelete from "../LibraryDelete/LibraryDelete";
+// import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./LibraryPage.scss";
 import axios from "axios";
 
@@ -61,7 +61,7 @@ const LibraryPage = ({ match, getAllLibraries }) => {
       {showForm ? (
         <LibraryForm getAllLibraries={getAllLibraries} foundLibrary={library} />
       ) : null}
-      <LibraryDelete library={library} getAllLibraries={getAllLibraries} />
+
       <p>{library.name}</p>
       <img
         src={`${library.img}`}

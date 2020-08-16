@@ -10,7 +10,7 @@ const LibraryList = ({ allLibraries, getAllLibraries }) => {
     displayLibraries = allLibraries.map((library) => {
       return (
         <Link key={library.id} to={`/libraries/${library.id}`}>
-          <span>{library.name}</span>
+          <span>{library.name ? library.name : "New Library - Add info"}</span>
         </Link>
       );
     });

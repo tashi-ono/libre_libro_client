@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./PopUpDetails.scss";
 // import LibraryForm from "../LibraryForm/LibraryForm";
 
-const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
-  console.log("library details props", selectedMarker, allLibraries);
+const PopUpDetails = ({
+  selectedMarker,
+  allLibraries,
+  getAllLibraries,
+  updateDeletedMarker,
+}) => {
+  // console.log("library details props", selectedMarker, allLibraries);
 
   // if selected marker latlng matches one in allLibraries, then render the info from allLibraries array
   let displayLibrary;
@@ -13,7 +19,7 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
       (library) => parseFloat(library.lat) === parseFloat(selectedMarker.lat)
     );
 
-    console.log("found library", foundLibrary);
+    // console.log("found library", foundLibrary);
     if (!selectedMarker) {
       displayLibrary = (
         <>
@@ -53,6 +59,11 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
                 ) : null}
               </p>
             </div>
+            <LibraryDelete
+              library={library}
+              getAllLibraries={getAllLibraries}
+              updateDeletedMarker={updateDeletedMarker}
+            />
           </div>
         );
       });
