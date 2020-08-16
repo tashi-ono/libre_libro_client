@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
-import LocationSearch from "../LocationSearch/LocationSearch";
+import LocationSearch, { UserLocation } from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
 
 import "./Map.scss";
@@ -22,8 +22,8 @@ const mapContainerStyle = {
 
 // This gives us a default location when we load map for the first time
 const center = {
-  lat: 38.438132,
-  lng: -122.711508,
+  lat: 37.22139321,
+  lng: -120.571855,
 };
 
 // Options can be found on Google Map API Docs
@@ -73,10 +73,10 @@ const Map = ({ allLibraries, getAllLibraries }) => {
 
   // Ref retains map instance without causing re-renders and resetting the map position
   const mapRef = useRef();
-  // const [mapRef, setMapRef] = useState()
   const onMapLoad = useCallback((map) => {
+    getAllLibraries();
+    // console.log("mapRef", map);
     mapRef.current = map;
-    console.log("mapRef", map);
   }, []);
 
   // useEffect(() => {
@@ -85,7 +85,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
 
   const panToSearch = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(15);
+    mapRef.current.setZoom(14);
   }, []);
 
   if (loadError) return "Error loading maps";
@@ -128,10 +128,11 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   return (
     <div>
       <LocationSearch panToSearch={panToSearch} />
+      <UserLocation panTo={panToSearch} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
-        zoom={13}
+        zoom={6}
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}

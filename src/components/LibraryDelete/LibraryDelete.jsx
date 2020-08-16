@@ -25,7 +25,9 @@ const LibraryDelete = ({ library, getAllLibraries }) => {
     }
   };
   if (isDeleted) {
+    // Need to render new map instance upon library deletion
     return <Redirect to="/libraries" />;
+    // return <Redirect to="/" />;
   }
   return <button onClick={handleLibraryDelete}>Delete Library</button>;
 };
