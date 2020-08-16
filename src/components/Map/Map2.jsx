@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
-import LocationSearch from "../LocationSearch/LocationSearch";
+import LocationSearch, { UserLocation } from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
 
 import "./Map.scss";
@@ -18,6 +18,12 @@ const libraries = ["places"];
 const mapContainerStyle = {
   width: "100vw",
   height: "60vh",
+};
+
+// This gives us a default location when we load map for the first time
+const defaultCenter = {
+  lat: 38.43808,
+  lng: -122.711508,
 };
 
 // Options can be found on Google Map API Docs
@@ -34,30 +40,12 @@ const Map = ({ allLibraries, getAllLibraries }) => {
   });
   const [markers, setMarkers] = useState([...allLibraries]);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [currentPosition, setCurrentPosition] = useState({});
 
-  //   const markerRef = useRef(null);
-  const defaultCenter = {
-    lat: 38.43808,
-    lng: -122.711508,
-  };
-
-  // useEffect sets current location to user's location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const currentPosition = {
-        lat: latitude,
-        lng: longitude,
-      };
-      setCurrentPosition(currentPosition);
-      //   console.log("useEffect", currentPosition);
-    });
-  }, []);
   // create onclick event to set map markers down
+  // useCallback will allow me to use the setMarker function, which will retain its value and only re-render itself
+  // if its dependancies are updated to a new value
 
-  const onMapClick = async (event) => {
+  const onMapClick = useCallback(async (event) => {
     // console.log(event);
 
     // console.log("added location", location);
@@ -79,7 +67,9 @@ const Map = ({ allLibraries, getAllLibraries }) => {
         id: event.id,
       },
     ]);
-  };
+    // console.log(event);
+    // console.log("all markers", markers);
+  }, []);
 
   // Ref retains map instance without causing re-renders and resetting the map position
   const mapRef = useRef();
@@ -89,15 +79,42 @@ const Map = ({ allLibraries, getAllLibraries }) => {
     mapRef.current = map;
   };
 
-  // useCallback will allow me to use the setMarker function, which will retain its value and only re-render itself
-  // if its dependancies are updated to a new value
-  const panToSearch = ({ lat, lng }) => {
+  // useEffect(() => {
+  //   onMapLoad();
+  // }, [allLibraries]);
+
+  const panToSearch = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
-  };
+  }, []);
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
+
+  // let needsLabel = allLibraries.filter((libInfo) => libInfo.name === null);
+
+  // console.log("needs label", needsLabel);
+  // let label;
+  // Conditional statement is so that any libraries without names will have a label for info to be added
+  // Label does not persist upon re-render!!!
+  // if (needsLabel) {
+  // const label = {
+  //   text: "Click to Add Info",
+  //   fontSize: "15px",
+  //   fontWeight: "bold",
+  //   zIndex: "3",
+  // };
+  // }
+
+  // let displayLibrary;
+  // if (allLibraries && selectedMarker) {
+  //   let foundLibrary = allLibraries.filter(
+  //     (library) => parseFloat(library.lat) === parseFloat(selectedMarker.lat)
+  //   );
+
+  // When user clicks on a marker, it creates lat/lng
+  // How do we tie in a click event to enter into a database?
+  // Tie the onclick event to another function that does an axios.post call
 
   // This allows you to get the location of a marker that you've added
   const handleMarkerClick = (event) => {
@@ -107,21 +124,14 @@ const Map = ({ allLibraries, getAllLibraries }) => {
       lng: parseFloat(event.latLng.lng()),
     });
   };
-
-  const updateDeletedMarker = () => {
-    console.log("handle marker delete");
-    getAllLibraries();
-  };
-
+  // console.log("all libraries props", allLibraries);
   return (
     <div>
       <LocationSearch panToSearch={panToSearch} />
-
+      <UserLocation panTo={panToSearch} />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        draggable={true}
-        // set default position to user's location if location services allowed
-        center={currentPosition.lat ? currentPosition : defaultCenter}
+        center={defaultCenter}
         zoom={14}
         options={options}
         onClick={onMapClick}
@@ -154,7 +164,6 @@ const Map = ({ allLibraries, getAllLibraries }) => {
               lat: parseFloat(marker.lat),
               lng: parseFloat(marker.lng),
             }}
-            draggable={true}
             clickable={true}
             icon={{
               url:
@@ -181,7 +190,6 @@ const Map = ({ allLibraries, getAllLibraries }) => {
                 selectedMarker={selectedMarker}
                 allLibraries={allLibraries}
                 getAllLibraries={getAllLibraries}
-                updateDeletedMarker={updateDeletedMarker}
               />
             </div>
           </InfoWindow>
