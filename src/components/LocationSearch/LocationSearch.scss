@@ -1,0 +1,19 @@
+.search-box {
+  //   position: absolute;
+  //   top: 15rem;
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   width: 100%;
+  //   max-width: 400px;
+  //   z-index: 5;
+}
+.search-box input {
+  width: 250px;
+}
+
+.combobox-popover {
+  background-color: white;
+  list-style: none;
+  border: 1px solid black;
+  padding: 2px 5px;
+}
