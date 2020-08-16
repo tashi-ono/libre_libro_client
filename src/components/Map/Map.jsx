@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
-import LocationSearch from "../LocationSearch/LocationSearch";
+import LocationSearch, { UserLocation } from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
 
 import "./Map.scss";
@@ -26,7 +26,7 @@ const options = {
   zoomControl: true,
 };
 
-const Map = ({ allLibraries, getAllLibraries }) => {
+const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   // Load our map and handle errors
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -96,27 +96,30 @@ const Map = ({ allLibraries, getAllLibraries }) => {
     mapRef.current.setZoom(14);
   };
 
+  if (panToLibrary) {
+    panToSearch(panToLibrary);
+  }
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
 
   // This allows you to get the location of a marker that you've added
   const handleMarkerClick = (event) => {
-    console.log("selected marker", event);
+    // console.log("selected marker", event);
     setSelectedMarker({
       lat: parseFloat(event.latLng.lat()),
       lng: parseFloat(event.latLng.lng()),
     });
   };
 
-  const updateDeletedMarker = () => {
-    console.log("handle marker delete");
-    getAllLibraries();
-  };
+  // const updateDeletedMarker = () => {
+  //   console.log("handle marker delete");
+  //   // getAllLibraries();
+  // };
 
   return (
     <div>
       <LocationSearch panToSearch={panToSearch} />
-
+      {/* <UserLocation panTo={panToSearch} /> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         draggable={true}
@@ -181,7 +184,6 @@ const Map = ({ allLibraries, getAllLibraries }) => {
                 selectedMarker={selectedMarker}
                 allLibraries={allLibraries}
                 getAllLibraries={getAllLibraries}
-                updateDeletedMarker={updateDeletedMarker}
               />
             </div>
           </InfoWindow>

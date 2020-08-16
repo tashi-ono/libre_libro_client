@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./PopUpDetails.scss";
 // import LibraryForm from "../LibraryForm/LibraryForm";
 
-const PopUpDetails = ({
-  selectedMarker,
-  allLibraries,
-  getAllLibraries,
-  updateDeletedMarker,
-}) => {
+const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
   // console.log("library details props", selectedMarker, allLibraries);
+
+  const [isMarkerDeleted, setIsMarkerDeleted] = useState(false);
+
+  const updateDeletedMarker = () => {
+    console.log("handle marker delete");
+    setIsMarkerDeleted(true);
+    // getAllLibraries();
+  };
 
   // if selected marker latlng matches one in allLibraries, then render the info from allLibraries array
   let displayLibrary;
@@ -20,21 +23,7 @@ const PopUpDetails = ({
     );
 
     // console.log("found library", foundLibrary);
-    if (!selectedMarker) {
-      displayLibrary = (
-        <>
-          {/* <LibraryForm
-            foundLibrary={foundLibrary[0]}
-            getAllLibraries={getAllLibraries}
-          /> */}
-
-          {/* Unable to use LibraryDelete component here without erroring out. */}
-          <Link to={`/libraries/${foundLibrary[0].id}`}>
-            <button>Add Comments or Delete Library</button>
-          </Link>
-        </>
-      );
-    } else {
+    if (selectedMarker) {
       displayLibrary = foundLibrary.map((library) => {
         return (
           <div className="pop-up-container" key={library.id}>
@@ -69,7 +58,7 @@ const PopUpDetails = ({
       });
     }
   }
-  return <>{displayLibrary}</>;
+  return <>{isMarkerDeleted ? <p>Deleted</p> : displayLibrary}</>;
 };
 
 export default PopUpDetails;
