@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -22,8 +22,8 @@ const mapContainerStyle = {
 
 // This gives us a default location when we load map for the first time
 const center = {
-  lat: 37.22139321,
-  lng: -120.571855,
+  lat: 38.460175,
+  lng: -122.735825,
 };
 
 // Options can be found on Google Map API Docs
@@ -73,11 +73,11 @@ const Map = ({ allLibraries, getAllLibraries }) => {
 
   // Ref retains map instance without causing re-renders and resetting the map position
   const mapRef = useRef();
-  const onMapLoad = useCallback((map) => {
-    getAllLibraries();
+  const onMapLoad = (map) => {
+    // getAllLibraries();
     // console.log("mapRef", map);
     mapRef.current = map;
-  }, []);
+  };
 
   // useEffect(() => {
   //   onMapLoad();
@@ -132,7 +132,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
-        zoom={6}
+        zoom={14}
         options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}

@@ -20,7 +20,7 @@ export const DataProvider = (props) => {
   }, []);
   return (
     <div>
-      <DataContext.Provider value={allLibraries}>
+      <DataContext.Provider value={[allLibraries, setAllLibraries]}>
         {props.children}
       </DataContext.Provider>
     </div>
