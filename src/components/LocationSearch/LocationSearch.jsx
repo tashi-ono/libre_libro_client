@@ -66,9 +66,6 @@ const LocationSearch = ({ panToSearch }) => {
           <ComboboxList>
             {status === "OK" &&
               data.map(({ description }, index) => {
-                {
-                  /* console.log("search data", data); */
-                }
                 return <ComboboxOption key={index} value={description} />;
               })}
           </ComboboxList>
