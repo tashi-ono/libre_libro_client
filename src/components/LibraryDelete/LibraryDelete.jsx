@@ -1,5 +1,6 @@
 import React from "react";
 // import { Redirect } from "react-router-dom";
+import apiUrl from "../../apiConfig";
 import axios from "axios";
 import "./LibraryDelete.scss";
 
@@ -14,7 +15,7 @@ const LibraryDelete = ({ library, getAllLibraries, updateDeletedMarker }) => {
     // console.log("confirm delete", confirmDelete);
     if (confirmDelete === true) {
       try {
-        await axios.delete(`http://localhost:3000/libraries/${library.id}`);
+        await axios.delete(`${apiUrl}/libraries/${library.id}`);
         // redirect to libraries page
         // setIsDeleted(true);
         getAllLibraries();

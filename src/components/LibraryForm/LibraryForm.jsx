@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiUrl from "../../apiConfig";
 import axios from "axios";
 import "./LibraryForm.scss";
 // DON'T FORGET TO ADD VALUE!
@@ -30,10 +31,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
   const updateLibrary = async (libraryObj) => {
     // console.log("library obj", libraryObj);
     try {
-      await axios.put(
-        `http://localhost:3000/libraries/${libraryObj.id}`,
-        libraryObj
-      );
+      await axios.put(`${apiUrl}/libraries/${libraryObj.id}`, libraryObj);
       getAllLibraries();
     } catch (err) {
       console.error(err);

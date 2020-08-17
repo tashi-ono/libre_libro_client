@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import CommentEdit from "../CommentEdit/CommentEdit";
 import CommentsForm from "../CommentsForm/CommentsForm";
 import LibraryForm from "../LibraryForm/LibraryForm";
+import apiUrl from "../../apiConfig";
 // import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./LibraryPage.scss";
 import axios from "axios";
@@ -16,9 +17,7 @@ const LibraryPage = ({ match, getAllLibraries }) => {
   useEffect(() => {
     const getALibrary = async () => {
       try {
-        let res = await axios.get(
-          `http://localhost:3000/libraries/${match.params.id}`
-        );
+        let res = await axios.get(`${apiUrl}/libraries/${match.params.id}`);
         // console.log("get a library details", res.data);
         // console.log("get comments", res.data.comments);
         setLibrary(res.data);
