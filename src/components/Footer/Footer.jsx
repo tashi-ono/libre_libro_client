@@ -3,10 +3,10 @@ import "./Footer.scss";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="footer">
       <p>&copy; Copyright 2020 NSCoen</p>
 
-      <div>
+      <span>
         Icons made by{" "}
         <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
           Freepik
@@ -15,7 +15,7 @@ const Footer = () => {
         <a href="https://www.flaticon.com/" title="Flaticon">
           www.flaticon.com
         </a>
-      </div>
+      </span>
 
       {/* <span>
         Photo by{" "}
@@ -29,6 +29,7 @@ const Footer = () => {
       </span> */}
 
       <span>
+        {" "}
         Photo by{" "}
         <a href="https://unsplash.com/@hitoshi_suzuki?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">
           Hitoshi Suzuki
