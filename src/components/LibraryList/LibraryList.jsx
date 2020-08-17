@@ -1,40 +1,61 @@
-import React from "react";
-// import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import FilterBar from "../FilterBar/FilterBar";
+
 import "./LibraryList.scss";
 
 const LibraryList = ({ allLibraries, getLibrary }) => {
-  // console.log("librarylist", allLibraries);
+  const [filteredLibs, setFilteredLibs] = useState(allLibraries);
+  const reverse = require("reverse-geocode");
+
+  const handleFilterSearch = (filterSearch) => {
+    let filteredLibraries = allLibraries.filter((filteredLib) => {
+      let geoObject = reverse.lookup(filteredLib.lat, filteredLib.lng, "us");
+      // console.log("geoObject", geoObject);
+      return geoObject.city.toLowerCase().includes(filterSearch.toLowerCase());
+    });
+    setFilteredLibs(filteredLibraries);
+  };
+  console.log("filtered Libraries", filteredLibs);
 
   let displayLibraries = <h2>Loading...</h2>;
+  let displayCityStates;
 
-  if (allLibraries[0]) {
-    displayLibraries = allLibraries.map((library) => {
+  if (filteredLibs[0]) {
+    displayLibraries = filteredLibs.map((library) => {
       getLibrary();
-
-      // getLocation = (event) => {
-      //   console.log("location event", event.target.innerHTML);
-      //   let panLibrary = allLibraries.filter(
-      //     (lib) => lib.name === event.target.innerHTML
-      //   );
-      //   setPanToLocation({
-      //     lat: parseFloat(panLibrary[0].lat),
-      //     lng: parseFloat(panLibrary[0].lng),
-      //   });
-      //  };
-      console.log("library list", library);
+      displayCityStates = reverse.lookup(library.lat, library.lng, "us");
       return (
-        // <Link key={library.id} to={`/libraries/${library.id}`}>
-        //   <span>{library.name ? library.name : "New Library - Add info"}</span>
-        // </Link>
-
-        <span key={library.id} onClick={() => getLibrary(library)}>
+        <div key={library.id} onClick={() => getLibrary(library)}>
           {library.name ? library.name : "New Library - Add info"}
-        </span>
+          <span>
+            {displayCityStates.city}, {displayCityStates.state_abbr}
+          </span>
+        </div>
       );
     });
+  } else {
+    if (allLibraries[0]) {
+      displayLibraries = allLibraries.map((library) => {
+        getLibrary();
+        displayCityStates = reverse.lookup(library.lat, library.lng, "us");
+        return (
+          <div key={library.id} onClick={() => getLibrary(library)}>
+            {library.name ? library.name : "New Library - Add info"}
+            <span>
+              {displayCityStates.city}, {displayCityStates.state_abbr}
+            </span>
+          </div>
+        );
+      });
+    }
   }
-  // console.log("pan location", panToLocation);
-  return <div>{displayLibraries}</div>;
+
+  return (
+    <div>
+      <FilterBar handleFilterSearch={handleFilterSearch} />
+      {displayLibraries}
+    </div>
+  );
 };
 
 export default LibraryList;

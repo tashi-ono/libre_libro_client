@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
-import LocationSearch, { UserLocation } from "../LocationSearch/LocationSearch";
+import LocationSearch from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
 
 import "./Map.scss";
