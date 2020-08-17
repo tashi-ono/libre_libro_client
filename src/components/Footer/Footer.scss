@@ -1,0 +1,33 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  border: 1px solid black;
+  width: 100%;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 0.8rem;
+  padding: 5px;
+  span a {
+    // text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    border: 1px solid black;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    span a {
+      // text-decoration: none;
+      color: white;
+    }
+  }
+}

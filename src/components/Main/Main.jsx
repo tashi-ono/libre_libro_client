@@ -5,6 +5,7 @@ import Homepage from "../Homepage/Homepage";
 // import PopUpDetails from "../PopUpDetails/PopUpDetails";
 import LibraryPage from "../LibraryPage/LibraryPage";
 import FindLibrary from "../FindLibrary/FindLibrary";
+import About from "../About/About";
 import "./Main.scss";
 
 const Main = () => {
@@ -28,6 +29,14 @@ const Main = () => {
     <main>
       <Switch>
         <Route exact path="/" component={Homepage} />
+        <Route exact path="/about" component={About} />
+        <Route
+          exact
+          path="/libraries/:id"
+          render={(props) => (
+            <LibraryPage {...props} getAllLibraries={getAllLibraries} />
+          )}
+        />
         <Route
           exact
           path="/libraries"
@@ -36,13 +45,6 @@ const Main = () => {
               allLibraries={allLibraries}
               getAllLibraries={getAllLibraries}
             />
-          )}
-        />
-        <Route
-          exact
-          path="/libraries/:id"
-          render={(props) => (
-            <LibraryPage {...props} getAllLibraries={getAllLibraries} />
           )}
         />
         <Route path="*" render={() => <Redirect to="/" />} />
