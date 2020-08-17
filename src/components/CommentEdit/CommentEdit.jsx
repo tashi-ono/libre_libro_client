@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import apiUrl from "../../apiConfig";
 import "./CommentEdit.scss";
 
 const CommentEdit = ({ comment, getAllLibraries }) => {
@@ -19,7 +20,7 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
     console.log("handle update submit", comment);
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/comments/${comment.id}`, {
+      await axios.put(`${apiUrl}/comments/${comment.id}`, {
         user_comments: userText,
       });
       getAllLibraries();
@@ -37,7 +38,7 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
     if (confirmDelete === true) {
       console.log("handle comment delete", comment);
       try {
-        await axios.delete(`http://localhost:3000/comments/${comment.id}`);
+        await axios.delete(`${apiUrl}/comments/${comment.id}`);
         getAllLibraries();
       } catch (err) {
         console.error(err);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import apiUrl from "../../apiConfig";
 import axios from "axios";
 import Homepage from "../Homepage/Homepage";
 // import PopUpDetails from "../PopUpDetails/PopUpDetails";
@@ -13,7 +14,7 @@ const Main = () => {
 
   const getAllLibraries = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/libraries");
+      const res = await axios.get(`${apiUrl}/libraries`);
       // console.log("all libraries from main", res.data);
       setAllLibraries(res.data);
     } catch (err) {

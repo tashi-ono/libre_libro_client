@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import apiUrl from "../../apiConfig";
 import "./CommentsForm.scss";
 import axios from "axios";
 // DONT FORGET TO ADD VALUE!
@@ -28,7 +29,7 @@ const CommentsForm = ({ library, getAllLibraries }) => {
     // console.log("commentObj", commentObj);
     try {
       await axios.post(
-        `http://localhost:3000/libraries/${library.id}/comments`,
+        `${apiUrl}/libraries/${library.id}/comments`,
         commentObj
       );
       getAllLibraries();

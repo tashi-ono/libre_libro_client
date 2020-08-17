@@ -5,6 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import apiUrl from "../../apiConfig";
 import axios from "axios";
 import LocationSearch, { UserLocation } from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
@@ -50,7 +51,7 @@ const Map = ({ allLibraries, getAllLibraries }) => {
 
     // console.log("added location", location);
     try {
-      await axios.post(`http://localhost:3000/libraries`, {
+      await axios.post(`${apiUrl}/libraries`, {
         lat: parseFloat(event.latLng.lat()),
         lng: parseFloat(event.latLng.lng()),
       });
