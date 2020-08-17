@@ -118,7 +118,7 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   // };
 
   return (
-    <div>
+    <div className="map">
       <LocationSearch panToSearch={panToSearch} />
       {/* <UserLocation panTo={panToSearch} /> */}
       <GoogleMap

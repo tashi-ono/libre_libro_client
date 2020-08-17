@@ -51,7 +51,7 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
   }
 
   return (
-    <div>
+    <div className="library-list">
       <FilterBar handleFilterSearch={handleFilterSearch} />
       {displayLibraries}
     </div>

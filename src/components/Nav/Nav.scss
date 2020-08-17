@@ -5,10 +5,10 @@
   // background-color: rgba(0, 0, 0, 0.5);
   // width: 100vw;
 
-  // position: absolute;
+  position: fixed;
   display: flex;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   top: 0;
   left: 0;
   margin: 0;
@@ -22,7 +22,7 @@
     justify-content: space-around;
     align-self: center;
     text-decoration: none;
-    color: white;
+    color: rgb(129, 57, 42);
   }
   h1 {
   }
@@ -30,10 +30,29 @@
     padding: 10px;
   }
 
+  .find {
+    visibility: hidden;
+  }
+  .about {
+    visibility: hidden;
+  }
+
   .book-icon {
     margin: 0;
     font-size: 50px;
     position: absolute;
     right: 0;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar {
+    // width: 100vw;
+    .find {
+      visibility: visible;
+    }
+    .about {
+      visibility: visible;
+    }
   }
 }
