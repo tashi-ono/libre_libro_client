@@ -58,7 +58,9 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
       });
     }
   }
-  return <>{isMarkerDeleted ? <p>Deleted</p> : displayLibrary}</>;
+  return (
+    <>{isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}</>
+  );
 };
 
 export default PopUpDetails;

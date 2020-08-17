@@ -15,7 +15,7 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
     });
     setFilteredLibs(filteredLibraries);
   };
-  console.log("filtered Libraries", filteredLibs);
+  // console.log("filtered Libraries", filteredLibs);
 
   let displayLibraries = <h2>Loading...</h2>;
   let displayCityStates;
