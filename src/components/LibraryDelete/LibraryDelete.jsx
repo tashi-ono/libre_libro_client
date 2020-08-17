@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 // import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "./LibraryDelete.scss";
 
 const LibraryDelete = ({ library, getAllLibraries, updateDeletedMarker }) => {
-  const [isDeleted, setIsDeleted] = useState(false);
-  console.log("library delete", library);
+  // const [isDeleted, setIsDeleted] = useState(false);
+  // console.log("library delete", library);
   const handleLibraryDelete = async (event) => {
     event.preventDefault();
     let confirmDelete = window.confirm(
@@ -16,23 +16,23 @@ const LibraryDelete = ({ library, getAllLibraries, updateDeletedMarker }) => {
       try {
         await axios.delete(`http://localhost:3000/libraries/${library.id}`);
         // redirect to libraries page
-        setIsDeleted(true);
-
-        updateDeletedMarker();
+        // setIsDeleted(true);
         getAllLibraries();
+        updateDeletedMarker();
       } catch (err) {
         console.error(err);
       }
     }
   };
 
-  if (isDeleted) {
-    updateDeletedMarker();
-    // Need to render new map instance upon library deletion without resetting to default center
-    // return window.location.reload();
-    // return <Redirect to="/" />;
-    // Create delete marker function to capture deletion in UI
-  }
+  // if (isDeleted) {
+  //   updateDeletedMarker();
+  //   getAllLibraries();
+  //   // Need to render new map instance upon library deletion without resetting to default center
+  //   // return window.location.reload();
+  //   // return <Redirect to="/" />;
+  //   // Create delete marker function to capture deletion in UI
+  // }
   return (
     <button className="library-delete-button" onClick={handleLibraryDelete}>
       Delete Library

@@ -25,7 +25,7 @@ const CommentsForm = ({ library, getAllLibraries }) => {
   };
 
   const addComment = async (commentObj) => {
-    console.log("commentObj", commentObj);
+    // console.log("commentObj", commentObj);
     try {
       await axios.post(
         `http://localhost:3000/libraries/${library.id}/comments`,

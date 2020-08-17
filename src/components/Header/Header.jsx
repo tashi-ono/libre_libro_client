@@ -8,6 +8,7 @@ const Header = () => {
       <span>Find A Library</span>
       <span>Add a Library</span>
       <span>Watchlist/Reviews</span>
+      <span>About</span>
     </div>
   );
 };
