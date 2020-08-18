@@ -13,7 +13,7 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
   };
 
   const handleEditChange = (event) => {
-    console.log("handle edit change", event.target.value);
+    // console.log("handle edit change", event.target.value);
     setUserText(event.target.value);
   };
   const updateComment = async (event) => {

@@ -39,9 +39,9 @@ const LibraryForm = ({ foundLibrary, getAllLibraries, setShowForm }) => {
     }
   };
   return (
-    <>
+    <div className="library-form-container">
       <p>Add Library Info</p>
-      <form onSubmit={handleSubmit}>
+      <form className="library-form" onSubmit={handleSubmit}>
         <label htmlFor="name"></label>
         <input
           type="text"
@@ -75,7 +75,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries, setShowForm }) => {
         <br />
         <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
 };
 

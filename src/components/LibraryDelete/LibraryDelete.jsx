@@ -16,7 +16,6 @@ const LibraryDelete = ({ library, getAllLibraries, updateDeletedMarker }) => {
     if (confirmDelete === true) {
       try {
         await axios.delete(`${apiUrl}/libraries/${library.id}`);
-        // redirect to libraries page
         // setIsDeleted(true);
         getAllLibraries();
         updateDeletedMarker();

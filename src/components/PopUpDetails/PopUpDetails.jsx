@@ -4,7 +4,12 @@ import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./PopUpDetails.scss";
 // import LibraryForm from "../LibraryForm/LibraryForm";
 
-const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
+const PopUpDetails = ({
+  selectedMarker,
+  allLibraries,
+  getAllLibraries,
+  // updateDeletedMarker,
+}) => {
   // console.log("library details props", selectedMarker, allLibraries);
 
   const [isMarkerDeleted, setIsMarkerDeleted] = useState(false);
@@ -12,7 +17,6 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
   const updateDeletedMarker = () => {
     console.log("handle marker delete");
     setIsMarkerDeleted(true);
-    // getAllLibraries();
   };
 
   // if selected marker latlng matches one in allLibraries, then render the info from allLibraries array
@@ -55,7 +59,10 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
     }
   }
   return (
-    <>{isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}</>
+    <>
+      {/* {displayLibrary} */}
+      {isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}
+    </>
   );
 };
 

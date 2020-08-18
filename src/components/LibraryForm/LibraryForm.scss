@@ -1,3 +1,18 @@
 // Style popup form
 .gm-style-iw {
 }
+
+.library-form-container {
+  background-color: #daecd4;
+  color: black;
+  p {
+    font-weight: bold;
+    padding-top: 15px;
+  }
+}
+.library-form {
+  button {
+    margin: 10px;
+    padding: 5px 10px;
+  }
+}

@@ -25,7 +25,7 @@ const FilterBar = ({ handleFilterSearch }) => {
         placeholder="Search By City Name"
         value={userInput}
       />
-      <button type="submit">Search &nbsp;|&nbsp;&nbsp; Reset&nbsp; </button>
+      <button type="submit">Search&nbsp; | &nbsp;Refresh Libraries</button>
     </form>
   );
 };
