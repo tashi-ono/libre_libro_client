@@ -14,20 +14,14 @@
   margin: 0;
   border: 1px solid black;
   width: 100%;
+  z-index: 1;
 
-  .nav-links {
-    display: flex;
-    // border: 1px solid black;
-    flex-basis: 12rem;
-    justify-content: space-around;
-    align-self: center;
-    text-decoration: none;
-    color: rgb(129, 57, 42);
-  }
   h1 {
   }
   span {
     padding: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
   }
 
   .find {
@@ -43,6 +37,15 @@
     position: absolute;
     right: 0;
   }
+}
+
+.nav-links {
+  display: flex;
+  flex-basis: 12rem;
+  justify-content: space-around;
+  align-self: center;
+  text-decoration: none;
+  color: #645a35;
 }
 
 @media only screen and (min-width: 768px) {

@@ -2,50 +2,70 @@
   height: 80vh;
   width: 100vw;
   padding-top: 100px;
-  border: 1px solid black;
+  // padding-bottom: 100px;
+
   background-image: url("https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597641216/LibreLibro%20Assets/hitoshi-suzuki-books-unsplash_qusezk.jpg");
   // background-repeat: no-repeat;
   background-size: cover;
-  background-position: -200px 0;
-  background-attachment: fixed;
+  background-position: -400px 0;
+
   .homepage-text {
+    width: 240px;
+    margin: 0 auto;
+
     h1 {
       color: white;
+      border: 1px solid white;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 5px 10px;
+      font-size: 2.4rem;
+      padding: 10px;
     }
     span {
+      margin-top: 30px;
       display: flex;
       justify-content: center;
-      // border: 1px solid black;
-      font-size: 1.7rem;
+      border: 1px solid white;
+      background-color: rgba(0, 0, 0, 0.4);
+      font-size: 1.6rem;
+      font-weight: bold;
       color: white;
+      border-radius: 5px 10px;
+      // text-decoration: none;
+    }
+    .take {
+      padding: 18px;
+    }
+
+    .leave {
+      padding: 18px;
+    }
+
+    .discover {
     }
   }
 }
 
-// @media only screen and (max-width: 768px) {
-//   .homepage-container {
+@media only screen and (min-width: 414px) {
+  .homepage-container {
+    background-position: -500px 130px;
+  }
+}
 
-//   }
-// }
-// @media only screen and (min-width: 768px) {
-//   .homepage-container {
-
-//   }
-// }
-
-// @media only screen and (min-width: 2000px) {
-//   .homepage-container {
-
-//   }
-// }
+@media only screen and (min-width: 600px) {
+  .homepage-container {
+    background-position: -500px 80px;
+  }
+}
 
 @media only screen and (min-width: 768px) {
   .homepage-container {
-    background-position: 0 0;
+    // background-position: 0 0;
     width: 100vw;
-    // height: 100vh;
-
+    height: 100vh;
+    background-attachment: fixed;
     .homepage-text {
+      width: 700px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(4, 1fr);
@@ -70,11 +90,32 @@
         justify-self: center;
         align-self: center;
       }
+      span {
+        font-size: 1.7rem;
+      }
     }
   }
-  @media only screen and (min-width: 1440px) {
-    .homepage-container {
-      background-position: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .homepage-container {
+    background-position: center;
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .homepage-container {
+    position: relative;
+    .take {
+      position: absolute;
+      top: 200px;
+      left: 200px;
+    }
+
+    .discover {
+      position: absolute;
+      bottom: 350px;
+      right: 80px;
+      padding: 18px;
     }
   }
 }

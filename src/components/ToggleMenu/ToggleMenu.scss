@@ -1,3 +1,22 @@
+.toggle-nav {
+  position: fixed;
+  z-index: 2;
+  right: 0;
+  top: 80px;
+  // background-color: rgba(255, 255, 255, 0.96);
+  background-color: rgba(238, 231, 228, 1);
+  // clip-path: polygon(0 0, 100% 0, 79% 100%, 21% 100%);
+  // clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  padding: 40px;
+  // padding: 20px;
+
+  span {
+    padding: 10px 10px 0px 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+}
 @media only screen and (min-width: 768px) {
   .disable-desktop {
     display: none;

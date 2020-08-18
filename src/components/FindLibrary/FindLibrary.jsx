@@ -24,16 +24,6 @@ const FindLibrary = ({ allLibraries, getAllLibraries }) => {
       panToLibraryLocation(lib);
     }
   };
-  // getLibrary = (event) => {
-  //   console.log("location event", event.target.innerHTML);
-  //   let panLibrary = allLibraries.filter(
-  //     (lib) => lib.name === event.target.innerHTML
-  //   );
-  //   setPanToLocation({
-  //     lat: parseFloat(panLibrary[0].lat),
-  //     lng: parseFloat(panLibrary[0].lng),
-  //   });
-  //  };
 
   return (
     <div>
