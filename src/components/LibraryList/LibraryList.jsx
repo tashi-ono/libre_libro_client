@@ -39,21 +39,21 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
         getLibrary();
         displayCityStates = reverse.lookup(library.lat, library.lng, "us");
         return (
-          <div key={library.id} onClick={() => getLibrary(library)}>
+          <li key={library.id} onClick={() => getLibrary(library)}>
             {library.name ? library.name : "New Library - Add info"}
             <span>
               {displayCityStates.city}, {displayCityStates.state_abbr}
             </span>
-          </div>
+          </li>
         );
       });
     }
   }
 
   return (
-    <div className="library-list">
+    <div className="library-list-container">
       <FilterBar handleFilterSearch={handleFilterSearch} />
-      {displayLibraries}
+      <ul id="library-list">{displayLibraries}</ul>
     </div>
   );
 };

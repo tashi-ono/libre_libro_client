@@ -26,9 +26,9 @@ const FindLibrary = ({ allLibraries, getAllLibraries }) => {
   };
 
   return (
-    <div>
+    <div className="find-library-container">
       {" "}
-      <h2>
+      <h2 id="find-library-title">
         Find a Library{" "}
         <span role="img" aria-label="books">
           📚

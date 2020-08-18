@@ -1,3 +1,27 @@
-.library-list {
+.library-list-container {
   margin-bottom: 100px;
+  // position: absolute;
+  // left: 20px;
+  // bottom: 150px;
+
+  #library-list {
+    // position: absolute;
+    // right: 10px;
+    // text-align: left;
+    padding: 10px 30px;
+    border: 10px solid #db854f;
+    width: 300px;
+    margin: 20px auto 100px;
+    height: 100px;
+
+    background-color: #aadaff;
+    // color: #db854f;
+    font-weight: bold;
+    overflow-x: scroll;
+    // text-shadow: 2px 2px lightgrey;
+
+    // li {
+    //   width: 300px;
+    // }
+  }
 }
