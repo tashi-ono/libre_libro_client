@@ -7,9 +7,10 @@ import Homepage from "../Homepage/Homepage";
 import LibraryPage from "../LibraryPage/LibraryPage";
 import FindLibrary from "../FindLibrary/FindLibrary";
 import About from "../About/About";
+import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import "./Main.scss";
 
-const Main = () => {
+const Main = ({ toggleMenu, toggleMenuClose }) => {
   const [allLibraries, setAllLibraries] = useState([]);
 
   const getAllLibraries = async () => {
@@ -25,9 +26,15 @@ const Main = () => {
   useEffect(() => {
     getAllLibraries();
   }, []);
-
+  let displayMenu = null;
+  if (toggleMenu) {
+    displayMenu = (
+      <ToggleMenu toggleMenuClose={toggleMenuClose} toggleMenu={toggleMenu} />
+    );
+  }
   return (
     <main>
+      {displayMenu}
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/about" component={About} />

@@ -53,21 +53,30 @@ const LibraryPage = ({ match, getAllLibraries }) => {
     });
   }
   return (
-    <div key={`lib${library.id}`}>
-      <button onClick={() => setShowForm(!showForm)}>
-        Edit Library Details
-      </button>
-      {showForm ? (
-        <LibraryForm getAllLibraries={getAllLibraries} foundLibrary={library} />
-      ) : null}
-
+    <div className="library-page" key={`lib${library.id}`}>
       <p>{library.name}</p>
       <img
         src={`${library.img}`}
         alt={library.img ? `broken-link-to-library-image` : ""}
         width="300"
       />
-      <p>Location Details: {library.details}</p>
+      {library.details ? (
+        <p>
+          <b>Location Details: {library.details}</b>
+        </p>
+      ) : (
+        <p>No details added yet!</p>
+      )}
+      <button onClick={() => setShowForm(!showForm)}>
+        Edit Library Details
+      </button>
+      {showForm ? (
+        <LibraryForm
+          getAllLibraries={getAllLibraries}
+          foundLibrary={library}
+          setShowForm={setShowForm}
+        />
+      ) : null}
       {displayComments}
       <CommentsForm library={library} getAllLibraries={getAllLibraries} />
     </div>

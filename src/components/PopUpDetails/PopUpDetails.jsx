@@ -33,11 +33,7 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
 
             <div className="pop-up-text">
               <Link to={`/libraries/${library.id}`}>
-                {library.name ? (
-                  library.name
-                ) : (
-                  <button>Add Library Info</button>
-                )}
+                {library.name ? library.name : <button>Edit Library</button>}
               </Link>
               <br />
               <p>

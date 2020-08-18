@@ -5,29 +5,34 @@
   // background-color: rgba(0, 0, 0, 0.5);
   // width: 100vw;
 
-  // position: absolute;
+  position: fixed;
   display: flex;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   top: 0;
   left: 0;
   margin: 0;
   border: 1px solid black;
   width: 100%;
+  z-index: 5;
 
-  .nav-links {
-    display: flex;
-    // border: 1px solid black;
-    flex-basis: 12rem;
-    justify-content: space-around;
-    align-self: center;
-    text-decoration: none;
-    color: white;
-  }
   h1 {
   }
   span {
     padding: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .find {
+    visibility: hidden;
+  }
+  .list {
+    visibility: hidden;
+  }
+
+  .about {
+    visibility: hidden;
   }
 
   .book-icon {
@@ -35,5 +40,36 @@
     font-size: 50px;
     position: absolute;
     right: 0;
+  }
+}
+
+.nav-links {
+  display: flex;
+  flex-basis: 12rem;
+  justify-content: space-around;
+  align-self: center;
+  text-decoration: none;
+  color: #645a35;
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar {
+    .find {
+      visibility: visible;
+    }
+    .list {
+      visibility: visible;
+    }
+    .about {
+      visibility: visible;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nav-links {
+    h1 {
+      padding-left: 20px;
+    }
   }
 }

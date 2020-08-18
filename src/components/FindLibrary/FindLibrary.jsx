@@ -24,21 +24,11 @@ const FindLibrary = ({ allLibraries, getAllLibraries }) => {
       panToLibraryLocation(lib);
     }
   };
-  // getLibrary = (event) => {
-  //   console.log("location event", event.target.innerHTML);
-  //   let panLibrary = allLibraries.filter(
-  //     (lib) => lib.name === event.target.innerHTML
-  //   );
-  //   setPanToLocation({
-  //     lat: parseFloat(panLibrary[0].lat),
-  //     lng: parseFloat(panLibrary[0].lng),
-  //   });
-  //  };
 
   return (
-    <div>
+    <div className="find-library-container">
       {" "}
-      <h2>
+      <h2 id="find-library-title">
         Find a Library{" "}
         <span role="img" aria-label="books">
           📚

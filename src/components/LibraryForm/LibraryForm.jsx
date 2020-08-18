@@ -3,7 +3,7 @@ import apiUrl from "../../apiConfig";
 import axios from "axios";
 import "./LibraryForm.scss";
 // DON'T FORGET TO ADD VALUE!
-const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
+const LibraryForm = ({ foundLibrary, getAllLibraries, setShowForm }) => {
   // console.log("library form found library", foundLibrary);
   const [userInput, setUserInput] = useState(
     { ...foundLibrary } || {
@@ -26,6 +26,7 @@ const LibraryForm = ({ foundLibrary, getAllLibraries }) => {
     // console.log("handle submit from libraryform", event.target.name);
     event.preventDefault();
     updateLibrary(userInput);
+    setShowForm(false);
   };
 
   const updateLibrary = async (libraryObj) => {
