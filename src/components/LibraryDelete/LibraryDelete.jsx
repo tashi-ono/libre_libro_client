@@ -1,7 +1,6 @@
 import React from "react";
 import apiUrl from "../../apiConfig";
 import axios from "axios";
-import "./LibraryDelete.scss";
 
 const LibraryDelete = ({ library, getAllLibraries, updateDeletedMarker }) => {
   const handleLibraryDelete = async (event) => {

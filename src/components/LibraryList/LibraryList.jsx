@@ -11,7 +11,6 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
   const handleFilterSearch = (filterSearch) => {
     filteredLibraries = allLibraries.filter((filteredLib) => {
       let geoObject = reverse.lookup(filteredLib.lat, filteredLib.lng, "us");
-      // console.log("geoObject", geoObject);
       return geoObject.city.toLowerCase().includes(filterSearch.toLowerCase());
     });
     setFilteredLibs(filteredLibraries);
