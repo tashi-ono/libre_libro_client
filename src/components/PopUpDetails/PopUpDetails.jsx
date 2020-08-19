@@ -2,16 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./PopUpDetails.scss";
-// import LibraryForm from "../LibraryForm/LibraryForm";
 
-const PopUpDetails = ({
-  selectedMarker,
-  allLibraries,
-  getAllLibraries,
-  // updateDeletedMarker,
-}) => {
-  // console.log("library details props", selectedMarker, allLibraries);
-
+const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
   const [isMarkerDeleted, setIsMarkerDeleted] = useState(false);
 
   const updateDeletedMarker = () => {
@@ -26,7 +18,6 @@ const PopUpDetails = ({
       (library) => parseFloat(library.lat) === parseFloat(selectedMarker.lat)
     );
 
-    // console.log("found library", foundLibrary);
     if (selectedMarker) {
       displayLibrary = foundLibrary.map((library) => {
         return (
@@ -69,10 +60,7 @@ const PopUpDetails = ({
     }
   }
   return (
-    <>
-      {/* {displayLibrary} */}
-      {isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}
-    </>
+    <>{isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}</>
   );
 };
 

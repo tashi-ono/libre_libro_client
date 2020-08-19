@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import apiUrl from "../../apiConfig";
 import "./CommentsForm.scss";
 import axios from "axios";
-// DONT FORGET TO ADD VALUE!
 
 const CommentsForm = ({ library, getAllLibraries }) => {
-  // console.log("comment form props", library);
   const [commentInput, setCommentInput] = useState({
     username: "",
     user_comments: "",
   });
-  const handleCommentChange = (event) => {
-    // console.log("comment changes", event.target.value);
+
     setCommentInput({
       ...commentInput,
       [event.target.name]: event.target.value,
@@ -20,13 +17,11 @@ const CommentsForm = ({ library, getAllLibraries }) => {
 
   const handleCommentSubmit = (event) => {
     event.preventDefault();
-    // console.log("handle comment submit", event.target);
     addComment(commentInput);
     setCommentInput({ username: "", user_comments: "" });
   };
 
   const addComment = async (commentObj) => {
-    // console.log("commentObj", commentObj);
     try {
       await axios.post(
         `${apiUrl}/libraries/${library.id}/comments`,

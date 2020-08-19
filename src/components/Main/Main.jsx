@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import apiUrl from "../../apiConfig";
 import axios from "axios";
 import Homepage from "../Homepage/Homepage";
-// import PopUpDetails from "../PopUpDetails/PopUpDetails";
 import LibraryPage from "../LibraryPage/LibraryPage";
 import FindLibrary from "../FindLibrary/FindLibrary";
 import About from "../About/About";
@@ -16,7 +15,6 @@ const Main = ({ toggleMenu, toggleMenuClose }) => {
   const getAllLibraries = async () => {
     try {
       const res = await axios.get(`${apiUrl}/libraries`);
-      // console.log("all libraries from main", res.data);
       setAllLibraries(res.data);
     } catch (err) {
       console.error(err);

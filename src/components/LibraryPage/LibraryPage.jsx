@@ -4,12 +4,10 @@ import CommentEdit from "../CommentEdit/CommentEdit";
 import CommentsForm from "../CommentsForm/CommentsForm";
 import LibraryForm from "../LibraryForm/LibraryForm";
 import apiUrl from "../../apiConfig";
-// import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./LibraryPage.scss";
 import axios from "axios";
 
 const LibraryPage = ({ match, getAllLibraries }) => {
-  // console.log("match library page", match);
   const [library, setLibrary] = useState([]);
   const [comments, setComments] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -18,8 +16,6 @@ const LibraryPage = ({ match, getAllLibraries }) => {
     const getALibrary = async () => {
       try {
         let res = await axios.get(`${apiUrl}/libraries/${match.params.id}`);
-        // console.log("get a library details", res.data);
-        // console.log("get comments", res.data.comments);
         setLibrary(res.data);
         setComments(res.data.comments);
       } catch (err) {
@@ -37,7 +33,6 @@ const LibraryPage = ({ match, getAllLibraries }) => {
         new Date(comment.created_at),
         "MM/dd/yyyy @ pp"
       );
-      // console.log("time", comment.created_at);
 
       return (
         <div

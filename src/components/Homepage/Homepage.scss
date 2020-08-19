@@ -2,10 +2,8 @@
   height: 80vh;
   width: 100vw;
   padding-top: 100px;
-  // padding-bottom: 100px;
 
   background-image: url("https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597641216/LibreLibro%20Assets/hitoshi-suzuki-books-unsplash_qusezk.jpg");
-  // background-repeat: no-repeat;
   background-size: cover;
   background-position: -400px 0;
 
@@ -31,7 +29,6 @@
       font-weight: bold;
       color: white;
       border-radius: 5px 10px;
-      // text-decoration: none;
     }
     .take {
       padding: 18px;
@@ -39,9 +36,6 @@
 
     .leave {
       padding: 18px;
-    }
-
-    .discover {
     }
   }
 }
@@ -60,7 +54,6 @@
 
 @media only screen and (min-width: 768px) {
   .homepage-container {
-    // background-position: 0 0;
     width: 100vw;
     height: 100vh;
     background-attachment: fixed;

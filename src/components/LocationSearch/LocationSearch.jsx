@@ -60,7 +60,6 @@ const LocationSearch = ({ panToSearch }) => {
           disabled={!ready}
           placeholder="Search"
         />
-        {/* This receives Google Places suggestions */}
 
         <ComboboxPopover className="combobox-popover">
           <ComboboxList>
@@ -76,22 +75,3 @@ const LocationSearch = ({ panToSearch }) => {
 };
 
 export default LocationSearch;
-
-// export const UserLocation = ({ panTo }) => {
-//   const handleClick = () => {
-//     // Line below takes three arguments: success, error, and options. We don't use options
-//     navigator.geolocation.getCurrentPosition(
-//       // "success" handling argument
-//       (position) => {
-//         // console.log("position", position);
-//         panTo({
-//           lat: position.coords.latitude,
-//           lng: position.coords.longitude,
-//         });
-//       },
-//       // "error" handling argument
-//       () => null
-//     );
-//   };
-//   return <button onClick={handleClick}>Search Near My Location</button>;
-// };

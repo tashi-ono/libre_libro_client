@@ -10,12 +10,10 @@ function App() {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleBookClick = () => {
-    // console.log("handle book click");
     setToggleMenu(!toggleMenu);
   };
 
   const toggleMenuClose = () => {
-    // console.log("handle toggle close");
     setToggleMenu(false);
   };
 
