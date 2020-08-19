@@ -15,9 +15,9 @@ MVP
 
 - A user can add library locations on a map to add to the database.
 - A user can search on a map for nearby libraries they can visit.
-- A user can click on a pin which would populate the name of the library below the map
+- A user can click on a pin which would show information about the library in a pop-up window
 - A user can make comments on a specific library for the public to read.
-- A user can click on the listed library and upload a photo of the library with the current date so other users know what books are available.
+- A user can click on the listed library and upload a photo of the library.
 
 PostMVP
 
@@ -51,28 +51,29 @@ Watchlist/Reviews Page
 
 #### Component Tree
 
-[Libre Libro Components](https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597161024/LibreLibro%20Wireframes/LibreLibro_Components_c3uaaa.png)
+[Libre Libro Components](https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597823169/LibreLibro%20Wireframes/LibreLibro_Components_xf8hxr.png)
 
 ### Time/Priority Matrix
 
 | Component                   | Priority | Estimated Time | Time Invested |
 | --------------------------- | :------: | :------------: | :-----------: |
-| Backend                     |    H     |      4hrs      |               |
-| Header                      |    M     |     0.5hrs     |               |
-| Homepage                    |    H     |      2hrs      |               |
-| Footer                      |    M     |     0.5hrs     |               |
-| Google Map API              |    H     |      8hrs      |               |
-| Search Zipcode bar          |    H     |      4hrs      |               |
-| Render search results       |    H     |      4hrs      |               |
-| Library Details page(CRUD)  |    H     |      4hrs      |               |
-| Post Comment Form           |    H     |      2hrs      |               |
-| Add photo functionality     |    M     |      2hrs      |               |
-| Add library modal           |    M     |      2hrs      |               |
-| Add library form            |    H     |      5hrs      |               |
-| Connect Backend to Frontend |    H     |      5hrs      |               |
-| Styling                     |    H     |      5hrs      |               |
-| Deployment                  |    H     |      4hrs      |               |
-| Total                       |    -     |     52hrs      |               |
+| Backend                     |    H     |      4hrs      |     3hrs      |
+| Nav                         |    M     |     0.5hrs     |     4hrs      |
+| Homepage                    |    H     |      2hrs      |    5.5hrs     |
+| Footer                      |    M     |     0.5hrs     |      0.5      |
+| Google Map API              |    H     |      8hrs      |    17.5hrs    |
+| Search Zipcode bar          |    H     |      4hrs      |     3hrs      |
+| Render search results       |    H     |      4hrs      |    3.5hrs     |
+| Library Details page(CRUD)  |    H     |      4hrs      |     3hrs      |
+| Markers                     |    H     |      0hrs      |    3.5hrs     |
+| Comments Form               |    H     |      2hrs      |    4.5hrs     |
+| Add photo functionality     |    M     |      2hrs      |      1.5      |
+| Library pop-up window       |    M     |      2hrs      |      1hr      |
+| Add library form            |    H     |      5hrs      |     1hrs      |
+| Connect Backend to Frontend |    H     |      5hrs      |    8.5hrs     |
+| Styling                     |    H     |      5hrs      |     17hrs     |
+| Deployment                  |    H     |      4hrs      |     2hrs      |
+| Total                       |    -     |     52hrs      |     79hrs     |
 
 ## MVP/Post-MVP
 
@@ -80,24 +81,28 @@ Watchlist/Reviews Page
 
 #### Basic Layout
 
-- Header
+- Nav
 - Footer
 - Homepage
+- About
 
 #### Find Library Page
 
 - Google Map
-- Location Pins
-- Selected pin will list library name below map
+- Markers
+- Search Bar
+- Selected pin will show library info
 
 #### Add a Library Modal
 
 - Add-library form
+- Add-comments form
 
 #### Library Details Page
 
 - Update/delete info
 - Render form for adding pics and comments
+- CRUD user comments
 
 ### Post-MVP
 
@@ -132,10 +137,13 @@ Watchlist/Reviews Page
 
 ## Additional Libraries
 
-- [@react-google-maps/api](https://www.newline.co/fullstack-react/articles/how-to-write-a-google-maps-react-component/)
-- [date-fns](https://date-fns.org/)
+- Google Maps API (Maps JavaScript API, Geocoding API, Places API)
+- @react-google-maps/api
+- use-places-autocomplete
+- @reach/combobox
+- reverse-geocode
+- date-fns
 - Axios
 - React, react-router-dom
 - Dotenv
-- Bootstrap
 - SASS/SCSS
