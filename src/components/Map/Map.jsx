@@ -10,8 +10,6 @@ import axios from "axios";
 import LocationSearch from "../LocationSearch/LocationSearch";
 import PopUpDetails from "../PopUpDetails/PopUpDetails";
 
-import "./Map.scss";
-
 // These are libraries that come with GoogleMap package
 const libraries = ["places"];
 

@@ -10,10 +10,7 @@ const Footer = () => {
         <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
           Freepik
         </a>{" "}
-        and{" "}
-        <a target="_blank" href="https://icons8.com">
-          Icons8.
-        </a>
+        and <a href="https://icons8.com">Icons8.</a>
       </span>
       <span>
         {" "}
