@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import apiUrl from "../../apiConfig";
 import axios from "axios";
 import "./LibraryForm.scss";
-// DON'T FORGET TO ADD VALUE!
+
 const LibraryForm = ({ foundLibrary, getAllLibraries, setShowForm }) => {
-  // console.log("library form found library", foundLibrary);
   const [userInput, setUserInput] = useState(
     { ...foundLibrary } || {
       name: "",
@@ -15,7 +14,6 @@ const LibraryForm = ({ foundLibrary, getAllLibraries, setShowForm }) => {
 
   // If no change was submitted for certain input fields, how do we prevent them from being updated to an empty string?
   const handleChange = (event) => {
-    // console.log("handle change from libraryform", event.target.value);
     setUserInput({
       ...userInput,
       [event.target.name]: event.target.value,
@@ -23,14 +21,12 @@ const LibraryForm = ({ foundLibrary, getAllLibraries, setShowForm }) => {
   };
 
   const handleSubmit = (event) => {
-    // console.log("handle submit from libraryform", event.target.name);
     event.preventDefault();
     updateLibrary(userInput);
     setShowForm(false);
   };
 
   const updateLibrary = async (libraryObj) => {
-    // console.log("library obj", libraryObj);
     try {
       await axios.put(`${apiUrl}/libraries/${libraryObj.id}`, libraryObj);
       getAllLibraries();

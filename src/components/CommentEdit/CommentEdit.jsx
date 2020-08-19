@@ -13,7 +13,6 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
   };
 
   const handleEditChange = (event) => {
-    // console.log("handle edit change", event.target.value);
     setUserText(event.target.value);
   };
   const updateComment = async (event) => {
@@ -34,7 +33,6 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
   // Confirms if you want to delete a comment with an alert window
   const handleCommentDelete = async (event) => {
     let confirmDelete = window.confirm("You sure you want to delete comment?");
-    // console.log("confirm delete", confirmDelete);
     if (confirmDelete === true) {
       console.log("handle comment delete", comment);
       try {

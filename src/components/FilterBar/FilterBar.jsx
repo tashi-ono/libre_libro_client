@@ -5,7 +5,6 @@ const FilterBar = ({ handleFilterSearch }) => {
   const [userInput, setUserInput] = useState("");
 
   const handleChange = (event) => {
-    // console.log("handle filter bar", event.target.value);
     setUserInput(event.target.value);
   };
 

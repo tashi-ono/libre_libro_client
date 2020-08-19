@@ -3,10 +3,6 @@ html {
   height: 100%;
   position: relative;
   background-color: #7fbe68;
-  /* background-image: url("https://www.transparenttextures.com/patterns/buried.png"); */
-  /* background-image: url("https://www.transparenttextures.com/patterns/cartographer.png"); */
-  /* background-image: url("https://www.transparenttextures.com/patterns/gravel.png"); */
-  /* background-image: url("https://www.transparenttextures.com/patterns/paper.png"); */
   background-image: url("https://www.transparenttextures.com/patterns/ag-square.png");
 }
 
@@ -16,13 +12,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* width: 100%;
-  height: 100%; */
   position: absolute;
   margin: 0;
 }
-
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */

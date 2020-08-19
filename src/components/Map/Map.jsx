@@ -41,12 +41,6 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   const [markers, setMarkers] = useState([...allLibraries]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [currentPosition, setCurrentPosition] = useState({});
-  // const [isMarkerDeleted, setIsMarkerDeleted] = useState(false);
-
-  // const updateDeletedMarker = () => {
-  //   console.log("handle marker delete");
-  //   setIsMarkerDeleted(true);
-  // };
 
   // useEffect sets current location to user's location
   useEffect(() => {
@@ -58,15 +52,11 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
         lng: longitude,
       };
       setCurrentPosition(currentPosition);
-      //   console.log("useEffect", currentPosition);
     });
   }, []);
   // create onclick event to set map markers down
 
   const onMapClick = async (event) => {
-    // console.log(event);
-
-    // console.log("added location", location);
     try {
       await axios.post(`${apiUrl}/libraries`, {
         lat: parseFloat(event.latLng.lat()),
@@ -92,8 +82,6 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   // if its dependancies are updated to a new value
   const mapRef = useRef();
   const onMapLoad = (map) => {
-    // getAllLibraries();
-    // console.log("mapRef", map);
     mapRef.current = map;
   };
 
@@ -110,23 +98,15 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
 
   // This allows you to get the location of a marker that you've added
   const handleMarkerClick = (event) => {
-    // console.log("selected marker", event);
     setSelectedMarker({
       lat: parseFloat(event.latLng.lat()),
       lng: parseFloat(event.latLng.lng()),
     });
-    // setIsMarkerDeleted(false);
   };
-
-  // const updateDeletedMarker = () => {
-  //   console.log("handle marker delete");
-  //   // getAllLibraries();
-  // };
 
   return (
     <div className="map">
       <LocationSearch panToSearch={panToSearch} />
-      {/* <UserLocation panTo={panToSearch} /> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         draggable={true}
@@ -137,7 +117,6 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {/* Create markers for libraries in our database */}
         {allLibraries.map((library) => (
           <Marker
             key={library.id}
@@ -155,8 +134,6 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
           />
         ))}
 
-        {/* Create a new marker upon clicking on map */}
-        {/* {console.log("markers", markers)} */}
         {markers.map((marker, index) => (
           <Marker
             key={index}
@@ -174,10 +151,8 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
             }}
             // Clicking on marker will allow the info window to pop up in ternary
             onClick={handleMarkerClick}
-            // label={needsLabel ? label : null}
           />
         ))}
-        {/* If marker is clicked on, then show info window */}
         {selectedMarker ? (
           <InfoWindow
             position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
@@ -191,7 +166,6 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
                 selectedMarker={selectedMarker}
                 allLibraries={allLibraries}
                 getAllLibraries={getAllLibraries}
-                // updateDeletedMarker={updateDeletedMarker}
               />
             </div>
           </InfoWindow>
