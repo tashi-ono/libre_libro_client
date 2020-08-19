@@ -7,53 +7,71 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
   const [filteredLibs, setFilteredLibs] = useState(allLibraries);
   const reverse = require("reverse-geocode");
 
+  let filteredLibraries = null;
   const handleFilterSearch = (filterSearch) => {
-    let filteredLibraries = allLibraries.filter((filteredLib) => {
+    filteredLibraries = allLibraries.filter((filteredLib) => {
       let geoObject = reverse.lookup(filteredLib.lat, filteredLib.lng, "us");
       // console.log("geoObject", geoObject);
       return geoObject.city.toLowerCase().includes(filterSearch.toLowerCase());
     });
     setFilteredLibs(filteredLibraries);
   };
-  // console.log("filtered Libraries", filteredLibs);
 
-  let displayLibraries = <h2>Loading...</h2>;
+  let displayAllLibraries = <h2>Loading...</h2>;
+  let displaySomeLibraries;
   let displayCityStates;
-
   if (filteredLibs[0]) {
-    displayLibraries = filteredLibs.map((library) => {
+    displaySomeLibraries = filteredLibs.map((library) => {
       getLibrary();
       displayCityStates = reverse.lookup(library.lat, library.lng, "us");
       return (
-        <div key={library.id} onClick={() => getLibrary(library)}>
-          {library.name ? library.name : "New Library - Add info"}
-          <span>
+        <div
+          className="single-library"
+          key={library.id}
+          onClick={() => getLibrary(library)}
+        >
+          <div className="library-name">
+            {library.name ? library.name : "New Library - Add info"}
+          </div>
+
+          <div className="library-city-state">
             {displayCityStates.city}, {displayCityStates.state_abbr}
-          </span>
+          </div>
         </div>
       );
     });
-  } else {
-    if (allLibraries[0]) {
-      displayLibraries = allLibraries.map((library) => {
-        getLibrary();
-        displayCityStates = reverse.lookup(library.lat, library.lng, "us");
-        return (
-          <li key={library.id} onClick={() => getLibrary(library)}>
+  } else if (!filteredLibs.length) {
+    displaySomeLibraries = <p>No search results</p>;
+  }
+
+  if (allLibraries[0]) {
+    displayAllLibraries = allLibraries.map((library) => {
+      getLibrary();
+      displayCityStates = reverse.lookup(library.lat, library.lng, "us");
+      return (
+        <div
+          className="single-library"
+          key={library.id}
+          onClick={() => getLibrary(library)}
+        >
+          <div className="library-name">
             {library.name ? library.name : "New Library - Add info"}
-            <span>
-              {displayCityStates.city}, {displayCityStates.state_abbr}
-            </span>
-          </li>
-        );
-      });
-    }
+          </div>
+
+          <div className="library-city-state">
+            {displayCityStates.city}, {displayCityStates.state_abbr}
+          </div>
+        </div>
+      );
+    });
   }
 
   return (
     <div className="library-list-container">
       <FilterBar handleFilterSearch={handleFilterSearch} />
-      <ul id="library-list">{displayLibraries}</ul>
+      <div id="library-list">
+        {filteredLibs ? displaySomeLibraries : displayAllLibraries}
+      </div>
     </div>
   );
 };

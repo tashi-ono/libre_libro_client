@@ -13,7 +13,7 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
   };
 
   const handleEditChange = (event) => {
-    console.log("handle edit change", event.target.value);
+    // console.log("handle edit change", event.target.value);
     setUserText(event.target.value);
   };
   const updateComment = async (event) => {
@@ -47,7 +47,7 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
   };
 
   return (
-    <div>
+    <div className="comment-edit">
       {editMode ? (
         <form onSubmit={updateComment}>
           <label htmlFor="update-comment">Edit text: </label>
@@ -57,11 +57,26 @@ const CommentEdit = ({ comment, getAllLibraries }) => {
             type="text"
             value={userText}
           />
-          <button type="submit">Update</button>
+          <button className="update-button" type="submit">
+            Update
+          </button>
         </form>
       ) : null}
-      <button onClick={handleCommentEdit}>Edit</button>
-      <button onClick={handleCommentDelete}>Delete</button>
+      <button className="icon-edit-button" onClick={handleCommentEdit}>
+        <img
+          src="https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597795986/LibreLibro%20Assets/icons8-pencil-48_1_z3rcsy.png"
+          alt="edit-button"
+          width="20px"
+        />
+      </button>
+      <button className="icon-edit-button" onClick={handleCommentDelete}>
+        {" "}
+        <img
+          src="https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597795992/LibreLibro%20Assets/icons8-trash-48_vip1jp.png"
+          alt="delete-button"
+          width="20px"
+        />
+      </button>
     </div>
   );
 };

@@ -1,14 +1,16 @@
 .toggle-nav {
   position: fixed;
-  z-index: 2;
+  z-index: 5;
   right: 0;
-  top: 80px;
+  top: 82px;
   // background-color: rgba(255, 255, 255, 0.96);
   background-color: rgba(238, 231, 228, 1);
   // clip-path: polygon(0 0, 100% 0, 79% 100%, 21% 100%);
   // clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  border: 1px solid black;
   padding: 40px;
+
   // padding: 20px;
 
   span {

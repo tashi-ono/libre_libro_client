@@ -4,7 +4,12 @@ import LibraryDelete from "../LibraryDelete/LibraryDelete";
 import "./PopUpDetails.scss";
 // import LibraryForm from "../LibraryForm/LibraryForm";
 
-const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
+const PopUpDetails = ({
+  selectedMarker,
+  allLibraries,
+  getAllLibraries,
+  // updateDeletedMarker,
+}) => {
   // console.log("library details props", selectedMarker, allLibraries);
 
   const [isMarkerDeleted, setIsMarkerDeleted] = useState(false);
@@ -12,7 +17,6 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
   const updateDeletedMarker = () => {
     console.log("handle marker delete");
     setIsMarkerDeleted(true);
-    // getAllLibraries();
   };
 
   // if selected marker latlng matches one in allLibraries, then render the info from allLibraries array
@@ -33,7 +37,17 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
 
             <div className="pop-up-text">
               <Link to={`/libraries/${library.id}`}>
-                {library.name ? library.name : <button>Edit Library</button>}
+                {library.name ? (
+                  library.name
+                ) : (
+                  <button className="icon-edit-button">
+                    <img
+                      src="https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597795986/LibreLibro%20Assets/icons8-pencil-48_1_z3rcsy.png"
+                      alt="edit-button"
+                      width="20px"
+                    />
+                  </button>
+                )}
               </Link>
               <br />
               <p>
@@ -55,7 +69,10 @@ const PopUpDetails = ({ selectedMarker, allLibraries, getAllLibraries }) => {
     }
   }
   return (
-    <>{isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}</>
+    <>
+      {/* {displayLibrary} */}
+      {isMarkerDeleted ? <p>Deleted...Please close box</p> : displayLibrary}
+    </>
   );
 };
 

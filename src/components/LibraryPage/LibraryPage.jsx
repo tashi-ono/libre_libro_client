@@ -40,11 +40,13 @@ const LibraryPage = ({ match, getAllLibraries }) => {
       // console.log("time", comment.created_at);
 
       return (
-        <div key={`${Date.parse(formattedDate)} + ${comment.id}`}>
-          <p>
-            <b>
-              {comment.username} posted on {formattedDate}{" "}
-            </b>
+        <div
+          className="comment-text"
+          key={`${Date.parse(formattedDate)} + ${comment.id}`}
+        >
+          <p className="username-time">
+            <span className="username">{comment.username}</span> originally
+            posted on: <br /> {formattedDate}{" "}
           </p>
           <p>{comment.user_comments}</p>
           <CommentEdit comment={comment} getAllLibraries={getAllLibraries} />
@@ -54,21 +56,32 @@ const LibraryPage = ({ match, getAllLibraries }) => {
   }
   return (
     <div className="library-page" key={`lib${library.id}`}>
-      <p>{library.name}</p>
+      <h2>Library Details</h2>
       <img
+        className="library-img"
         src={`${library.img}`}
         alt={library.img ? `broken-link-to-library-image` : ""}
         width="300"
       />
+      <h3>
+        <b>{library.name}</b>
+      </h3>
+
       {library.details ? (
-        <p>
-          <b>Location Details: {library.details}</b>
-        </p>
+        <div className="library-details">
+          <p>
+            <b>Location Details: </b>
+          </p>
+          <p>{library.details}</p>
+        </div>
       ) : (
         <p>No details added yet!</p>
       )}
-      <button onClick={() => setShowForm(!showForm)}>
-        Edit Library Details
+      <button
+        className="edit-library-button"
+        onClick={() => setShowForm(!showForm)}
+      >
+        Edit Library
       </button>
       {showForm ? (
         <LibraryForm

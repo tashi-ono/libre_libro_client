@@ -27,6 +27,11 @@ const options = {
   zoomControl: true,
 };
 
+const defaultCenter = {
+  lat: 38.43808,
+  lng: -122.711508,
+};
+
 const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   // Load our map and handle errors
   const { isLoaded, loadError } = useLoadScript({
@@ -36,12 +41,12 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   const [markers, setMarkers] = useState([...allLibraries]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [currentPosition, setCurrentPosition] = useState({});
+  // const [isMarkerDeleted, setIsMarkerDeleted] = useState(false);
 
-  //   const markerRef = useRef(null);
-  const defaultCenter = {
-    lat: 38.43808,
-    lng: -122.711508,
-  };
+  // const updateDeletedMarker = () => {
+  //   console.log("handle marker delete");
+  //   setIsMarkerDeleted(true);
+  // };
 
   // useEffect sets current location to user's location
   useEffect(() => {
@@ -83,6 +88,8 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
   };
 
   // Ref retains map instance without causing re-renders and resetting the map position
+  // useCallback will allow me to create a map instance, which will retain its value and only re-render itself
+  // if its dependancies are updated to a new value
   const mapRef = useRef();
   const onMapLoad = (map) => {
     // getAllLibraries();
@@ -90,8 +97,6 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
     mapRef.current = map;
   };
 
-  // useCallback will allow me to use the setMarker function, which will retain its value and only re-render itself
-  // if its dependancies are updated to a new value
   const panToSearch = ({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
@@ -110,6 +115,7 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
       lat: parseFloat(event.latLng.lat()),
       lng: parseFloat(event.latLng.lng()),
     });
+    // setIsMarkerDeleted(false);
   };
 
   // const updateDeletedMarker = () => {
@@ -185,6 +191,7 @@ const Map = ({ allLibraries, getAllLibraries, panToLibrary }) => {
                 selectedMarker={selectedMarker}
                 allLibraries={allLibraries}
                 getAllLibraries={getAllLibraries}
+                // updateDeletedMarker={updateDeletedMarker}
               />
             </div>
           </InfoWindow>

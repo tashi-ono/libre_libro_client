@@ -38,32 +38,42 @@ const CommentsForm = ({ library, getAllLibraries }) => {
     }
   };
   return (
-    <form onSubmit={handleCommentSubmit}>
-      <label htmlFor="username">Add username: </label>
-      <input
-        type="text"
-        name="username"
-        placeholder="username (required)"
-        onChange={handleCommentChange}
-        value={commentInput.username}
-        required
-      />
-      <br />
+    <div className="comment-form">
+      <form onSubmit={handleCommentSubmit}>
+        <div>
+          <label htmlFor="username">
+            <b>Add username:</b>{" "}
+          </label>
+        </div>
+        <input
+          type="text"
+          name="username"
+          placeholder="username (required)"
+          onChange={handleCommentChange}
+          value={commentInput.username}
+          required
+        />
+        <br />
 
-      <label htmlFor="user_comments"></label>
+        <label htmlFor="user_comments"></label>
 
-      <textarea
-        name="user_comments"
-        type="text"
-        placeholder="Enter comment here..."
-        rows="10"
-        cols="40"
-        onChange={handleCommentChange}
-        value={commentInput.user_comments}
-        required
-      ></textarea>
-      <button type="submit">Submit</button>
-    </form>
+        <textarea
+          name="user_comments"
+          type="text"
+          placeholder="Enter comment here..."
+          rows="10"
+          cols="40"
+          onChange={handleCommentChange}
+          value={commentInput.user_comments}
+          required
+        ></textarea>
+        <div>
+          <button className="comment-submit" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
