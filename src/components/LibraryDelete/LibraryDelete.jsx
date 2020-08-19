@@ -34,8 +34,16 @@ const LibraryDelete = ({ library, getAllLibraries, updateDeletedMarker }) => {
   //   // Create delete marker function to capture deletion in UI
   // }
   return (
-    <button className="library-delete-button" onClick={handleLibraryDelete}>
-      Delete Library
+    // <button className="library-delete-button" onClick={handleLibraryDelete}>
+    //   Delete Library
+    // </button>
+
+    <button className="icon-edit-button" onClick={handleLibraryDelete}>
+      <img
+        src="https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597795992/LibreLibro%20Assets/icons8-trash-48_vip1jp.png"
+        alt="delete-button"
+        width="20px"
+      />
     </button>
   );
 };

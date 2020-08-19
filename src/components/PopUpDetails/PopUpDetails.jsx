@@ -37,7 +37,17 @@ const PopUpDetails = ({
 
             <div className="pop-up-text">
               <Link to={`/libraries/${library.id}`}>
-                {library.name ? library.name : <button>Edit Library</button>}
+                {library.name ? (
+                  library.name
+                ) : (
+                  <button className="icon-edit-button">
+                    <img
+                      src="https://res.cloudinary.com/gaseir526-tashiono/image/upload/v1597795986/LibreLibro%20Assets/icons8-pencil-48_1_z3rcsy.png"
+                      alt="edit-button"
+                      width="20px"
+                    />
+                  </button>
+                )}
               </Link>
               <br />
               <p>

@@ -17,12 +17,12 @@ const FilterBar = ({ handleFilterSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="filter-form" onSubmit={handleSubmit}>
       <label htmlFor="filter-search"></label>
       <input
         name="filter-search"
         onChange={handleChange}
-        placeholder="Search By City Name"
+        placeholder="Filter List By City"
         value={userInput}
       />
       <button type="submit">Search&nbsp; | &nbsp;Refresh Libraries</button>

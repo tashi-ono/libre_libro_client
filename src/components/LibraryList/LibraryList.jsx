@@ -25,7 +25,11 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
       getLibrary();
       displayCityStates = reverse.lookup(library.lat, library.lng, "us");
       return (
-        <div key={library.id} onClick={() => getLibrary(library)}>
+        <div
+          className="single-library"
+          key={library.id}
+          onClick={() => getLibrary(library)}
+        >
           <div className="library-name">
             {library.name ? library.name : "New Library - Add info"}
           </div>
@@ -45,7 +49,11 @@ const LibraryList = ({ allLibraries, getLibrary }) => {
       getLibrary();
       displayCityStates = reverse.lookup(library.lat, library.lng, "us");
       return (
-        <div key={library.id} onClick={() => getLibrary(library)}>
+        <div
+          className="single-library"
+          key={library.id}
+          onClick={() => getLibrary(library)}
+        >
           <div className="library-name">
             {library.name ? library.name : "New Library - Add info"}
           </div>

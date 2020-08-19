@@ -8,8 +8,8 @@
     // position: absolute;
     // right: 10px;
     // text-align: left;
-    padding: 10px 30px;
-    border: 10px solid #db854f;
+    padding: 10px;
+    border: 8px solid #db854f;
     // border: 10px solid hsl(27, 100%, 67%);
     // border: 10px solid #ff217f;
     width: auto;
@@ -24,11 +24,35 @@
     // li {
     //   width: 300px;
     // }
+
+    .single-library {
+      display: grid;
+      grid-template-columns: 1fr, 1fr;
+      grid-template-rows: auto;
+      grid-template-areas: "name location";
+      column-gap: 2px;
+
+      .library-name {
+        grid-area: name;
+        justify-self: start;
+      }
+
+      .library-city-state {
+        grid-area: location;
+        justify-self: end;
+      }
+    }
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 600px) {
   #library-list {
     max-width: 300px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #library-list {
+    max-width: 400px;
   }
 }
