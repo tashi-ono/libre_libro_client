@@ -9,7 +9,10 @@
     height: 100px;
     background-color: #aadaff;
     font-weight: bold;
-    overflow-x: scroll;
+    overflow-y: hidden;
+    &:hover {
+      overflow-y: scroll;
+    }
 
     .single-library {
       display: grid;
@@ -26,6 +29,7 @@
       .library-city-state {
         grid-area: location;
         justify-self: end;
+        // margin-right: 10px;
       }
     }
   }
